@@ -29,11 +29,10 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 
 
 } else if ($_SERVER['REQUEST_METHOD'] == "POST") {
-	header("HTTP/1.0 400 Bad Request");
-	print("Endpoint does not support POST");
-	exit();
+	if(count($_GET == 11)) {
+		
+	}
 }
-
 
 header("HTTP/1.0 400 Bad Request");
 print("Did not understand URL");
