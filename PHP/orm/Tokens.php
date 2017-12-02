@@ -18,19 +18,29 @@ class Token
 
   public static function getToken($username, $password) {
     $mysqli=Token::connect();
-    $query = "SELECT username,password FROM Final_User where username = '".$username."'";
+    $query = "SELECT username,password,id FROM Final_User where username = '".$username."'";
     $response = $mysqli->query($query);
     $user_info = $response->fetch_array();
     if($response) {
       if($user_info['password']==$password) {
-        $token = Token::generateToken($username);
+        $user_id = $user_info['id'];
+        $token = Token::generateToken($username,$user_id);
         return array(
           'token'=>$token
-        )
+        );
       }
     } else {
       return false;
     }
+  }
+  
+  public static function generateToken($username,$user_id) {
+    $token = md5(uniqid($username, true));
+    $expiry = date('Y-m-d H:i:s');
+    $expiry = date('Y-m-d H:i:s', strtotime($expiry. ' + 10 days'));
+    $mysqli = Token::connect();
+    $mysqli->query("INSERT into Final_Tokens VALUES (0,'".$token."' ,".$user_id.", '".$expiry."')");
+    return $token;
   }
 }
 ?>
