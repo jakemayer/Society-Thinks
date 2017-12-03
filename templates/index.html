@@ -2,9 +2,36 @@
 <html>
 <head>
 	<title>Society Thinks</title>
-	<link href="">
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<link rel="stylesheet"
+          href="../material-components-web/dist/material-components-web.css">
+	<link rel="stylesheet" type = "text/css" href="../css/index.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
-<body>
-<h1>Society Thinks </h1>
+
+<body class="mdc-typography">
+	<header class="mdc-toolbar mdc-toolbar--fixed">
+      <div class="mdc-toolbar__row">
+        <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
+          <span class="mdc-toolbar__title">Society Thinks</span>
+        </section>
+        <section class="mdc-toolbar__section mdc-toolbar__section--align-end" role="toolbar">
+          	<a href="#" class="material-icons mdc-toolbar__icon" aria-label="note add" alt="note add">note_add</a>
+          <a href="#" class="material-icons mdc-toolbar__icon" aria-label="Print this page" alt="Print this page">question_answer</a> 
+          <a href="#" class="material-icons mdc-toolbar__icon" aria-label="Bookmark this page" alt="Bookmark this page">contact_mail</a>
+        </section>
+      </div>
+    </header>
+    <section id="register" style="padding-top: 5%;">
+	<button class="mdc-button mdc-button--raised mdc-ripple-upgraded" style="--mdc-ripple-fg-size:49.439996337890626px; --mdc-ripple-fg-scale:2.0210529105331956; --mdc-ripple-fg-translate-start:14.346652221679687px, -7.719998168945313px; --mdc-ripple-fg-translate-end:16.479998779296874px, -6.719998168945313px;">
+          Register
+        </button>
+      <button class="mdc-button mdc-button--raised mdc-ripple-upgraded" style="--mdc-ripple-fg-size:49.439996337890626px; --mdc-ripple-fg-scale:2.0210529105331956; --mdc-ripple-fg-translate-start:14.346652221679687px, -7.719998168945313px; --mdc-ripple-fg-translate-end:16.479998779296874px, -6.719998168945313px;">
+          Login
+        </button>
+    </section>
+	<script src="../material-components-web/dist/material-components-web.js"></script>
+	<script>mdc.autoInit()</script>
 </body>
+
 </html>
