@@ -1,5 +1,7 @@
 $( document ).ready(function() {
 	mdc.autoInit();
+
+
     const MDCDialog = mdc.dialog.MDCDialog;
 	const MDCDialogFoundation = mdc.dialog.MDCDialogFoundation;
 	const util = mdc.dialog.util;
@@ -10,6 +12,7 @@ $( document ).ready(function() {
 	});
 
 	$("#login-form").submit(function(e) {
+		$("#overlay").css("display","block");
 		e.preventDefault();
 		let username = e.target[0].value;
 		let password = e.target[1].value;
@@ -22,6 +25,7 @@ $( document ).ready(function() {
 			$.cookie('uuid', response['token'], { expires: 10, path: '/' }); //save cookie
 			window.location.replace("app.html");
 		}).fail(function(error) {
+			$("#overlay").css("display","none");
 			login_dialog.show();
 			$("#error-txt").text("Oops! Your username or password is incorrect");
 		});
