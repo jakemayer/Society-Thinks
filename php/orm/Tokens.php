@@ -26,7 +26,8 @@ class Token
         $user_id = $user_info['id'];
         $token = Token::generateToken($username,$user_id);
         return array(
-          'token'=>$token
+          'token'=>$token,
+          'user_id'=>$user_id
         );
       }
     } else {
@@ -43,17 +44,21 @@ class Token
     return $token;
   }
 
-  public static function logout($username) {
+  public static function logout($user_id) {
     $mysqli = Token::connect();
-    $user_response = $mysqli->query("SELECT id from Final_User f where f.username = '".$username."'");
-    if($user_response) {
-      $user_id = $user_response->fetch_array()['id'];
+    $query = "DELETE FROM Final_Tokens where user = ".$user_id;
+    $mysqli->query($query);
+    return true;
+  }
+
+  public static function authorizeRequest($id, $token) {
+    $mysqli = Token::connect();
+    $response = $mysqli->query("SELECT * From Final_Tokens where user = ".$id." and token = '".$token."'");
+    if($response) {
+      return true;
     } else {
       return false;
     }
-    $query = "DELETE FROM Final_Tokens ft where ft.user = ".$user_id;
-    $response = $mysqli->query($query);
-    return $response;
   }
 }
 ?>

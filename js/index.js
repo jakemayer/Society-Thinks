@@ -23,6 +23,7 @@ $( document ).ready(function() {
 		  dataType: "json"
 		}).done(function(response) {
 			$.cookie('uuid', response['token'], { expires: 10, path: '/' }); //save cookie
+			$.cookie('uid',response['user_id'],{expires:10,path:'/'});
 			window.location.replace("app.html");
 		}).fail(function(error) {
 			$("#overlay").css("display","none");

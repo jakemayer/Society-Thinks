@@ -21,5 +21,16 @@ class User
       return false;
     }
   }
+
+  public static function getUserInfo($id) {
+    $mysqli = User::connect();
+    $query = "SELECT * from Final_User where id=".$id;
+    $response = $mysqli->query($query);
+    if($response) {
+      return $response->fetch_array();
+    } else {
+      return false;
+    }
+  }
 }
 ?>

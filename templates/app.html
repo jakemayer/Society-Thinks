@@ -7,19 +7,36 @@
 	<link rel="stylesheet"
           href="../material-components-web/dist/material-components-web.css">
 	<link rel="stylesheet" type = "text/css" href="../css/index.css">
+	<link rel="stylesheet" type = "text/css" href="../css/loaders.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<script src="../js/app.js"></script>
 </head>
 <body>
+<div id="overlay">
+      <div class="loading"></div>
+</div>
 <header class="mdc-toolbar mdc-toolbar--fixed">
       <div class="mdc-toolbar__row">
         <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
           <span class="mdc-toolbar__title"><a href="index.html" class="home-link">Society Thinks</a></span>
         </section>
         <section class="mdc-toolbar__section mdc-toolbar__section--align-end" role="toolbar">
-          <button style="margin-top: 17%; margin-right: 5%; background-color: white !important; color: black;" class="mdc-button mdc-button--raised mdc-ripple-upgraded" id="login-btn">
-          Hey User!
-        </button>
+       	<div class="mdc-menu-anchor" style="top: 0px; right: 0px;">
+        	  <button style="margin-top: 8.2%; margin-right: 20%; background-color: white !important; color: black;" class="mdc-button mdc-button--raised mdc-ripple-upgraded" id="user-menu-btn">
+	          Hey User!
+	        </button>
+
+
+	          <div class="mdc-simple-menu" style="position: absolute; margin-top: 39%; margin-right: 3%; transform-origin: right top 0px; right: 0px; top: 0px; transform: scale(0, 0);" tabindex="-1" id="user-menu">
+	            <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true" style="transform: scale(1, 1);">
+	              <li class="mdc-list-item" role="menuitem" tabindex="0" id="logout-btn">Logout <i class="material-icons" style="padding-left:40%;">exit_to_app</i></li>
+	              <li class="mdc-list-divider" role="separator"></li>
+	              <li class="mdc-list-item" role="menuitem" tabindex="0" style="">My Account<i  style="padding-left:14%;" class="material-icons mdc-list-item__start-detail" aria-hidden="true">person</i></li>
+
+	            </ul>
+	          </div>
+        </div>
+
         </section>
       </div>
     </header>
@@ -42,7 +59,6 @@
 
 	          <nav class="mdc-list">
 	            <a class="mdc-list-item" href="#">
-	              <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">person</i>My Account
 	            </a>
 	          </nav>
 	        </div>
@@ -51,5 +67,8 @@
 	  <main>
 	  	
 	  </main>
+	        <script src="../material-components-web/dist/material-components-web.js"></script>
+
 </body>
+
 </html>

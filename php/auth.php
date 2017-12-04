@@ -7,19 +7,21 @@ $path_components = explode('/', $_SERVER['PATH_INFO']);
 
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
 	if(count($path_components) > 0 && $path_components[1] == "logout") {
-		if(count($_GET == 1) && $_GET['username'] != null) {
-			$response = Token::logout($path_components[1]);
-			if($response == false) {
+		if(count($_GET == 1) && $_GET['user'] != null) {
+			$response = Token::logout($_GET['user']);
+			if($response) {
+				header("Content-Type: application/json");
+				print(json_encode(array(
+					'response' => "logged out"
+				)));	
+				exit();
+			} else {
 				header("HTTP/1.0 Bad Request");
 				header("Content-Type: application/json");		
 				print(json_encode(array(
 					'error' => "error when logging out"
 				)));
-			} else {
-				header("Content-Type: application/json");
-				print(json_encode(array(
-					'response' => "logged out"
-				)));			
+				exit();		
 			}
 		} else {
 			header("HTTP/1.0 Bad Request");

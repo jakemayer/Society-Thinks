@@ -17,3 +17,6 @@ php -S localhost:8000
 cd path/to/folder
 python -m SimpleHTTPServer 3000
 ```
+
+Navigate to
+[here](http://0.0.0.0:3000/templates/index.html)
