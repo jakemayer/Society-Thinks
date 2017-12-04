@@ -4,6 +4,7 @@ Dependencies:
 
  * PHP
  * Python
+ * UNC Login...Must be connected to vpn
 
 
 Getting Started:
