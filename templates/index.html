@@ -2,7 +2,8 @@
 <html>
 <head>
 	<title>Society Thinks</title>
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 	<link rel="stylesheet"
           href="../material-components-web/dist/material-components-web.css">
 	<link rel="stylesheet" type = "text/css" href="../css/index.css">
@@ -14,22 +15,21 @@
 	<header class="mdc-toolbar mdc-toolbar--fixed">
       <div class="mdc-toolbar__row">
         <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
-          <span class="mdc-toolbar__title">Society Thinks</span>
+          <span class="mdc-toolbar__title"><a href="index.html" class="home-link">Society Thinks</a></span>
         </section>
         <section class="mdc-toolbar__section mdc-toolbar__section--align-end" role="toolbar">
-          	<a href="#" class="material-icons mdc-toolbar__icon" aria-label="note add" alt="note add">note_add</a>
-          <a href="#" class="material-icons mdc-toolbar__icon" aria-label="Print this page" alt="Print this page">question_answer</a> 
-          <a href="#" class="material-icons mdc-toolbar__icon" aria-label="Bookmark this page" alt="Bookmark this page">contact_mail</a>
+          <button style="margin-top: 17%; margin-right: 5%; background-color: white !important; color: black;" class="mdc-button mdc-button--raised mdc-ripple-upgraded" id="login-btn">
+          Login
+        </button>
         </section>
       </div>
     </header>
     <section id="register" style="padding-top: 5%;">
-	     <button class="mdc-button mdc-button--raised mdc-ripple-upgraded">
+	     <a href="register.html" id="register-btn" class="mdc-button mdc-button--raised mdc-ripple-upgraded">
+        <div style="margin-top: 10%; font-weight: 900; text-align: center;">
           Register
-        </button>
-      <button class="mdc-button mdc-button--raised mdc-ripple-upgraded" id="login-btn">
-          Login
-        </button>
+        </div>
+        </a>
         <aside class="mdc-dialog" id="login-dialog">
           <div class="mdc-dialog__surface">
             <header class="mdc-dialog__header">
@@ -38,21 +38,68 @@
               </h2>
             </header>
             <section id="my-mdc-dialog-description" class="mdc-dialog__body">
-            <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
-              <input type="text" class="mdc-text-field__input" id="username">
-              <label for="username" class="mdc-text-field__label">Username</label>
-            </div>
-            <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
-              <input type="password" class="mdc-text-field__input" id="password">
-              <label for="password" class="mdc-text-field__label">Password</label>
-            </div>
+            <form id="login-form">
+              <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                <input type="text" class="mdc-text-field__input" id="username">
+                <label for="username" class="mdc-text-field__label">Username</label>
+              </div>
+              <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                <input type="password" class="mdc-text-field__input" id="password">
+                <label for="password" class="mdc-text-field__label">Password</label>
+              </div>
+              <div id="error-txt" style="color:#580000">
+                
+              </div>
             </section>
             <footer class="mdc-dialog__footer">
               <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--cancel">Cancel</button>
-              <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept mdc-dialog__action">Login</button>
+              <button type="submit" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept mdc-dialog__action">Login</button>
+              </form>
+
             </footer>
           </div>
         </aside>
+    </section>
+    <section id="about">
+      <div class="mdc-layout-grid">
+        <div class="mdc-layout-grid__inner" >
+          <div class="mdc-layout-grid__cell--align--middle mdc-layout-grid__cell--span-12">
+            <div class="section-header mdc-button mdc-button--raised mdc-ripple-upgraded" style="margin-bottom: 20px;"><div style="margin-top:5%">How it works</div></div>
+              <ul class="mdc-list mdc-list--two-line mdc-list--avatar-list two-line-avatar-text-icon-demo" id="check-list-about">
+                  <li class="mdc-list-item mdc-ripple-upgraded">
+                    <span class="mdc-list-item__start-detail grey-bg" role="presentation">
+                      <i class="material-icons" aria-hidden="true">check_circle</i>
+                    </span>
+                    <span class="mdc-list-item__text">
+                      Step 1
+                      <span class="mdc-list-item__text__secondary">Enter in some info about yourself</span>
+                    </span>
+                  </li>
+                  <li class="mdc-list-item mdc-ripple-upgraded">
+                    <span class="mdc-list-item__start-detail grey-bg" role="presentation">
+                      <i class="material-icons" aria-hidden="true">check_circle</i>
+                    </span>
+                    <span class="mdc-list-item__text">
+                      Step 2
+                      <span class="mdc-list-item__text__secondary">Answer some questions and gain points</span>
+                    </span>
+                  </li>
+                  <li class="mdc-list-item mdc-ripple-upgraded">
+                    <span class="mdc-list-item__start-detail grey-bg" role="presentation">
+                      <i class="material-icons" aria-hidden="true">check_circle</i>
+                    </span>
+                    <span class="mdc-list-item__text">
+                      Step 3
+                      <span class="mdc-list-item__text__secondary">Ask the world anything you like!</span>
+                    </span>
+                  </li>
+                </ul>
+            </div>
+          </div>
+        </div>
+    </section>
+    <section id="contact">
+      
     </section>
       <script src="../material-components-web/dist/material-components-web.js"></script>
 

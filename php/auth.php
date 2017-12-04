@@ -1,10 +1,35 @@
 <?php
+header("Access-Control-Allow-Origin: *");
 date_default_timezone_set('America/New_York');
 require_once('orm/Tokens.php');
 require_once('orm/User.php');
 $path_components = explode('/', $_SERVER['PATH_INFO']);
 
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
+	if(count($path_components) > 0 && $path_components[1] == "logout") {
+		if(count($_GET == 1) && $_GET['username'] != null) {
+			$response = Token::logout($path_components[1]);
+			if($response == false) {
+				header("HTTP/1.0 Bad Request");
+				header("Content-Type: application/json");		
+				print(json_encode(array(
+					'error' => "error when logging out"
+				)));
+			} else {
+				header("Content-Type: application/json");
+				print(json_encode(array(
+					'response' => "logged out"
+				)));			
+			}
+		} else {
+			header("HTTP/1.0 Bad Request");
+			header("Content-Type: application/json");		
+			print(json_encode(array(
+				'error' => "error when logging out"
+			)));
+		exit();			
+		}
+	}
 	if(count($_GET) != 2) {
 		header("HTTP/1.0 Bad Request");
 		header("Content-Type: application/json");		

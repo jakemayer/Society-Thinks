@@ -42,5 +42,18 @@ class Token
     $mysqli->query("INSERT into Final_Tokens VALUES (0,'".$token."' ,".$user_id.", '".$expiry."')");
     return $token;
   }
+
+  public static function logout($username) {
+    $mysqli = Token::connect();
+    $user_response = $mysqli->query("SELECT id from Final_User f where f.username = '".$username."'");
+    if($user_response) {
+      $user_id = $user_response->fetch_array()['id'];
+    } else {
+      return false;
+    }
+    $query = "DELETE FROM Final_Tokens ft where ft.user = ".$user_id;
+    $response = $mysqli->query($query);
+    return $response;
+  }
 }
 ?>

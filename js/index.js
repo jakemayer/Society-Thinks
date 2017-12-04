@@ -7,6 +7,24 @@ $( document ).ready(function() {
 
 	$("#login-btn").click(function() {
 		login_dialog.show();
-	})
+	});
+
+	$("#login-form").submit(function(e) {
+		e.preventDefault();
+		let username = e.target[0].value;
+		let password = e.target[1].value;
+		$.ajax({
+		  url: "http://0.0.0.0:8000/auth.php",
+		  method: "GET",
+		  data: { username: username, password:password},
+		  dataType: "json"
+		}).done(function(response) {
+			$.cookie('uuid', response['token'], { expires: 10, path: '/' }); //save cookie
+			window.location.replace("app.html");
+		}).fail(function(error) {
+			login_dialog.show();
+			$("#error-txt").text("Oops! Your username or password is incorrect");
+		});
+	});
 
 });

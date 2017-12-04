@@ -7,3 +7,56 @@
 .register-section {
 	background-color: whitesmoke;
 }
+
+.home-link {
+	text-decoration: none;
+	color: white;
+	font-weight: 800;
+}
+
+#register {
+	background-color: whitesmoke;
+	height: 50vh;
+}
+
+#register-btn {
+	margin-left:45% !important;
+	margin-top:10%;
+	width: 20vh;
+	height: 8vh;
+	border-radius: 100px;
+	font-size: 18px;
+}
+
+
+#about {
+	margin-top: -3vh;
+	background-color: lightblue;
+	height: 70vh;
+}
+
+.section-header {
+	color: black !important;
+	background-color: white !important;
+	margin-left:40% !important;
+	width: 20%;
+	height: 27%;
+	border-radius: 100px;
+	font-weight: 900;
+	font-size: 20px;
+}
+
+.header-txt {
+	margin-top: 5%;
+}
+
+#about .mdc-list {
+	background-color: white;
+	width: 20%;
+	box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+}
+
+#check-list-about {
+	margin-left: 34%;
+	width: 30% !important;
+}
