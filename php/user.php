@@ -7,7 +7,16 @@ $path_components = explode('/', $_SERVER['PATH_INFO']);
 
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
 	if(count($path_components) >=2 && $path_components[1] != "") {
-		
+		$is_authorized = Token::authorizeRequest($path_components[1],$_COOKIE['uuid']);
+		if($is_authorized) {
+			header("Content-Type: application/json");
+			print(json_encode(User::getUserInfo($path_components[1])));
+			exit();
+		} else {
+			header("HTTP/1.0 401 Unauthorized");
+			print("oh no!");
+			exit();
+		}
 	}
 
 
@@ -15,7 +24,6 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 } else if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 }
-
 header("HTTP/1.0 400 Bad Request");
 print("Did not understand URL");
 exit();

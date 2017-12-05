@@ -5,7 +5,16 @@ $( document ).ready(function() {
 		console.log("you're unauthorized!");
 		window.location.replace("index.html");
 	} else {
-		console.log("you're good!");
+		$.ajax({
+		  url: "http://0.0.0.0:8000/user.php/"+$.cookie("uid"),
+		  method: "GET",
+		  dataType: "json"
+		}).done(function(response) {
+			$("#user-menu-btn").text("Hey "+response['fname']+"!");
+		}).fail(function(error) {
+			console.log(error); //log them out or something
+		});
+
 	}
 	$("#user-menu-btn").click(function() {
 		user_menu.open = !user_menu.open;

@@ -8,6 +8,9 @@ $( document ).ready(function() {
 	var login_dialog = new mdc.dialog.MDCDialog(document.querySelector('#login-dialog'));
 
 	$("#login-btn").click(function() {
+		if($.cookie("uuid") != null && $.cookie("uid") !=null) {
+			window.location.replace("app.html");
+		} 
 		login_dialog.show();
 	});
 

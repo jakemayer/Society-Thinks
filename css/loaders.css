@@ -12,7 +12,7 @@
   height: 40%;
   margin-top: 20%;
   margin-left: 37%;
-  border: 4rem solid rgba(255, 255, 255, 0.2);
+  border: 2rem solid rgba(255, 255, 255, 0.2);
   border-top-color: #fff;
   animation: spin 1s infinite linear;
 }

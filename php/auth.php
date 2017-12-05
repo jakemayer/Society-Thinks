@@ -57,18 +57,18 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 
 
 } else if ($_SERVER['REQUEST_METHOD'] == "POST") {
-	if(count($_GET >= 10)) {
+	if(count($_POST >= 10)) {
 		$response = User::createUser(
-			$_GET["fname"],
-			$_GET["lname"],
-			$_GET["email"],
-			$_GET["username"],
-			$_GET["password"],
-			$_GET["race"],
-			$_GET["gender"],
-			$_GET["religion"],		
-			$_GET["birthday"],
-			$_GET["country"]
+			$_POST["fname"],
+			$_POST["lname"],
+			$_POST["email"],
+			$_POST["username"],
+			$_POST["password"],
+			$_POST["race"],
+			$_POST["gender"],
+			$_POST["religion"],		
+			$_POST["birthday"],
+			$_POST["country"]
 		);
 		if($response == false) {
 			header("HTTP/1.0 400 Bad Request");
@@ -85,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 		header("HTTP/1.0 Bad Request");
 		header("Content-Type: application/json");		
 		print(json_encode(array(
-			'error' => "Expected at least 10 parameters, got ".count($_GET)
+			'error' => "Expected at least 10 parameters, got ".count($_POST)
 		)));		
 	}
 }
