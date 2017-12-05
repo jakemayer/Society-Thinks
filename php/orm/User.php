@@ -32,5 +32,20 @@ class User
       return false;
     }
   }
+
+  public static function checkUnique($type,$value) {
+    $mysqli = User::connect();
+    $query = "SELECT * from Final_User where ".$type." = '".$value."'";
+    $response = $mysqli->query($query);
+    if($response->fetch_array() != null) {
+      return array(
+        "status"=>false
+      );
+    } else {
+      return array(
+        "status"=>true
+      );
+    }
+  }
 }
 ?>

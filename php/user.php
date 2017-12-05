@@ -6,7 +6,7 @@ require_once('orm/User.php');
 $path_components = explode('/', $_SERVER['PATH_INFO']);
 
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
-	if(count($path_components) >=2 && $path_components[1] != "") {
+	if(count($path_components) >=2 && $path_components[1] != "" && $path_components[1] != "unique-check") {
 		$is_authorized = Token::authorizeRequest($path_components[1],$_COOKIE['uuid']);
 		if($is_authorized) {
 			header("Content-Type: application/json");
@@ -17,6 +17,10 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 			print("oh no!");
 			exit();
 		}
+	} else if(count($path_components) >=2 && $path_components[1] != "" && $path_components[1] == "unique-check") {
+		header("Content-Type: application/json");
+		print(json_encode(User::checkUnique($_GET['type'],$_GET['value'])));
+		exit();
 	}
 
 
