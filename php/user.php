@@ -34,6 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 				$_POST["lname"],
 				$_POST["email"],
 				$_POST["username"],
+				$_POST["pro_pic"],
 				$path_components[2]
 			);
 			header("Content-Type: application/json");

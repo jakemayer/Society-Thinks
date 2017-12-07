@@ -69,12 +69,11 @@
               </h2>
             </header>
             <section id="my-mdc-dialog-description" class="mdc-dialog__body">
+            	<form id="change-pic-form">
             	<div class="uploadOuter">
-					 <label for="uploadFile" class="mdc-button">Upload Image</label>
-					 <strong>OR</strong>
 					<dspan class="dragBox" >
-					  Drag and Drop image here
-					<input type="file" onChange="dragNdrop(event)"  ondragover="drag()" ondrop="drop()" id="uploadFile"  />
+					  Click or Drop image here
+					<input  style="cursor:pointer;"type="file" id="pro-pic-input" onChange="dragNdrop(event)"  ondragover="drag()" ondrop="drop()" id="uploadFile"  />
 					</span>
 				</div>
 				<div id="preview" class="sample-pic-row"></div>

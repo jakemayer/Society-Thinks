@@ -22,7 +22,7 @@ class User
     }
   }
 
-  public static function updateUser($fname, $lname, $email, $username, $user_id) {
+  public static function updateUser($fname, $lname, $email, $username, $pro_pic, $user_id) {
     $mysqli = User::connect();
     $query = "UPDATE Final_User SET ";
 
@@ -37,6 +37,9 @@ class User
     }
     if($username != null) {
       $query = $query."username = '".$username."',";
+    }
+    if($pro_pic != null) {
+      $query = $query."pro_pic = '".$pro_pic."',";
     }
     $query = substr($query, 0, strlen($query)-1);
     $query = $query." where id = ".$user_id;
