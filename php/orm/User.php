@@ -11,15 +11,36 @@ class User
 		      "marclanedb");
   }
 
-  public static function createUser($fname,$lname,$email,$username,$password,$race,$gender,$religion,$birthday,$country) {
+  public static function createUser($fname,$lname,$email,$username,$password,$race,$gender,$religion,$birthday,$country,$pic) {
     $mysqli = User::connect();
-    $query = "INSERT INTO `Final_User`(`id`, `fname`, `lname`, `email`, `username`, `password`, `race`, `gender`, `religion`, `birthday`, `country`) VALUES (0,'".$fname."','".$lname."','".$email."','".$username."','".$password."','".$race."','".$gender."','".$religion."','".$birthday."','".$country."')";
+    $query = "INSERT INTO `Final_User`(`id`, `fname`, `lname`, `email`, `username`, `password`, `race`, `gender`, `religion`, `birthday`, `country`,`pro_pic`) VALUES (0,'".$fname."','".$lname."','".$email."','".$username."','".$password."','".$race."','".$gender."','".$religion."','".$birthday."','".$country."','".$pic."')";
     $result = $mysqli->query($query);
     if($result) {
       return $mysqli->query("SELECT * from Final_User u where u.username = '".$username."'")->fetch_array();
     } else {
       return false;
     }
+  }
+
+  public static function updateUser($fname, $lname, $email, $username, $user_id) {
+    $mysqli = User::connect();
+    $query = "UPDATE Final_User SET ";
+
+    if($fname != null) {
+      $query = $query."fname = '".$fname."',";
+    }
+    if($lname != null) {
+      $query = $query."lname = '".$lname."',";
+    }
+    if($email != null) {
+      $query = $query."email = '".$email."',";
+    }
+    if($username != null) {
+      $query = $query."username = '".$username."',";
+    }
+    $query = substr($query, 0, strlen($query)-1);
+    $query = $query." where id = ".$user_id;
+     return $mysqli->query($query);
   }
 
   public static function getUserInfo($id) {

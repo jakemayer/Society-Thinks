@@ -26,6 +26,25 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 
 
 } else if ($_SERVER['REQUEST_METHOD'] == "POST") {
+	if(count($path_components) >=1 && $path_components[1] == "update" && $path_components[2] != "") {
+		$is_authorized = Token::authorizeRequest($path_components[2], $_POST['uuid']);
+		if($is_authorized) {
+			$response = User::updateUser(
+				$_POST["fname"],
+				$_POST["lname"],
+				$_POST["email"],
+				$_POST["username"],
+				$path_components[2]
+			);
+			header("Content-Type: application/json");
+			print(json_encode($response));
+			exit();
+		} else {
+			header("HTTP/1.0 401 Unauthorized");
+			print("oh no!");
+			exit();
+		}
+	}
 
 }
 header("HTTP/1.0 400 Bad Request");

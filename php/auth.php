@@ -68,7 +68,8 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 			$_POST["gender"],
 			$_POST["religion"],		
 			$_POST["birthday"],
-			$_POST["country"]
+			$_POST["country"],
+			$_POST["pro_pic"]
 		);
 		if($response == false) {
 			header("HTTP/1.0 400 Bad Request");
