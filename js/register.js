@@ -1,3 +1,7 @@
+//c30a265d598a06a client id	
+//912ff8c75f015c2a171f8990130c5849398ea969 client secret
+//imgur ^
+
 $( document ).ready(function() {
 	mdc.autoInit();
 
@@ -78,7 +82,7 @@ $( document ).ready(function() {
 			  		},
 			  dataType: "json"
 		}).done(function(response) {
-			if(response['status'] && value.length != 0 && value.indexOf("@") != -1) 
+			if(response['status'] && value.length != 0 && value.indexOf("@") != -1 && (value.indexOf(".com") != -1 || value.indexOf(".net") != -1 || value.indexOf(".edu") != -1)) 
 			{
 				$("#email-status").text("check_circle");
 				$("#email-status").css("color","green");
@@ -173,41 +177,93 @@ $( document ).ready(function() {
 		let religion = new MDCSelect(document.querySelector(".mdc-select1")).value;
 		let gender = new MDCSelect(document.querySelector(".mdc-select2")).value;
 		let country = new MDCSelect(document.querySelector(".mdc-select3")).value;
-
-		if(password !== password2) {
-			console.log("nope");
-		} else {
-			$.ajax({
-			  url: "http://0.0.0.0:8000/auth.php",
+		var formdata = new FormData();
+		let picLink = "";
+		formdata.append("image",$("#pro-pic").prop("files")[0]);
+		$.ajax({
+			  url: "https://api.imgur.com/3/image",
 			  method: "POST",
-			  data: {
-			  	fname:fname,
-			  	lname:lname,
-			  	email:email,
-			  	username:username,
-			  	password:password,
-			  	race:race,
-			  	gender:gender,
-			  	religion:religion,
-			  	birthday:birthday,
-			  	country:country
+			  headers: {
+			  	Authorization:"Client-ID c30a265d598a06a",
 			  },
+			  processData: false,
+			  contentType: false,
+			  data:formdata,
 			  dataType: "json"
 			}).done(function(response) {
-				$.ajax({
-				  url: "http://0.0.0.0:8000/auth.php",
-				  method: "GET",
-				  data: { username: response['username'], password:response['password']},
-				  dataType: "json"
-				}).done(function(response) {
-					$.cookie('uuid', response['token'], { expires: 10, path: '/' }); //save cookie
-					$.cookie('uid',response['user_id'],{expires:10,path:'/'});
-					window.location.replace("app.html");
-				});
+				if(password !== password2) {
+					console.log("nope");
+				} else {
+					$.ajax({
+					  url: "http://0.0.0.0:8000/auth.php",
+					  method: "POST",
+					  data: {
+					  	fname:fname,
+					  	lname:lname,
+					  	email:email,
+					  	username:username,
+					  	password:password,
+					  	race:race,
+					  	gender:gender,
+					  	religion:religion,
+					  	birthday:birthday,
+					  	country:country,
+					  	pro_pic: response.data['link']
+					  },
+					  dataType: "json"
+					}).done(function(response) {
+						$.ajax({
+						  url: "http://0.0.0.0:8000/auth.php",
+						  method: "GET",
+						  data: { username: response['username'], password:response['password']},
+						  dataType: "json"
+						}).done(function(response) {
+							$.cookie('uuid', response['token'], { expires: 10, path: '/' }); //save cookie
+							$.cookie('uid',response['user_id'],{expires:10,path:'/'});
+							window.location.replace("app.html");
+						});
+					}).fail(function(error) {
+						console.log(error); //loop through and display fields
+					});
+				}
 			}).fail(function(error) {
-				console.log(error); //loop through and display fields
-			});
-		}
+				if(password !== password2) {
+					console.log("nope");
+				} else {
+					$.ajax({
+					  url: "http://0.0.0.0:8000/auth.php",
+					  method: "POST",
+					  data: {
+					  	fname:fname,
+					  	lname:lname,
+					  	email:email,
+					  	username:username,
+					  	password:password,
+					  	race:race,
+					  	gender:gender,
+					  	religion:religion,
+					  	birthday:birthday,
+					  	country:country,
+					  	pro_pic:null
+					  },
+					  dataType: "json"
+					}).done(function(response) {
+						$.ajax({
+						  url: "http://0.0.0.0:8000/auth.php",
+						  method: "GET",
+						  data: { username: response['username'], password:response['password']},
+						  dataType: "json"
+						}).done(function(response) {
+							$.cookie('uuid', response['token'], { expires: 10, path: '/' }); //save cookie
+							$.cookie('uid',response['user_id'],{expires:10,path:'/'});
+							window.location.replace("app.html");
+						});
+					}).fail(function(error) {
+						console.log(error); //loop through and display fields
+					});
+				}
+		});
+		
 	});
 
 });

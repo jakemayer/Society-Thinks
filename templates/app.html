@@ -18,12 +18,11 @@
 <header class="mdc-toolbar mdc-toolbar--fixed">
       <div class="mdc-toolbar__row">
         <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
-          <span class="mdc-toolbar__title"><a href="index.html" class="home-link">Society Thinks</a></span>
+          <span class="mdc-toolbar__title"><a  href="home.html" class="home-link router">Society Thinks</a></span>
         </section>
         <section class="mdc-toolbar__section mdc-toolbar__section--align-end" role="toolbar">
        	<div class="mdc-menu-anchor" style="top: 0px; right: 0px;">
         	  <button style="margin-top: 8.2%; margin-right: 20%; background-color: white !important; color: black;" class="mdc-button mdc-button--raised mdc-ripple-upgraded" id="user-menu-btn">
-	          
 	        </button>
 
 
@@ -43,8 +42,12 @@
     <div class="mdc-toolbar-fixed-adjust">
 	    <nav class="mdc-permanent-drawer">
 	        <div class="mdc-list-group">
+	          <nav class="mdc-list" id="user-info-sidebar">
+	            <div class="pic-row"><img class="circle" id="user-pro-pic"/> </div>
+	          </nav>
+	           <hr class="mdc-list-divider">
 	          <nav class="mdc-list">
-	            <a class="mdc-list-item mdc-permanent-drawer--selected" href="#">
+	            <a class="mdc-list-item mdc-permanent-drawer--selected router" href="home.html">
 	              <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">home</i>Home
 	            </a>
 	            <a class="mdc-list-item" href="#">
@@ -55,20 +58,57 @@
 	            </a>
 	          </nav>
 
-	          <hr class="mdc-list-divider">
-
-	          <nav class="mdc-list">
-	            <a class="mdc-list-item" href="#">
-	            </a>
-	          </nav>
 	        </div>
 	      </nav>
 	 </div>
+	   <aside class="mdc-dialog" id="picture-dialog">
+          <div class="mdc-dialog__surface">
+            <header class="mdc-dialog__header">
+              <h2 id="my-mdc-dialog-label" class="mdc-dialog__header__title">
+                Edit your Profile Picture
+              </h2>
+            </header>
+            <section id="my-mdc-dialog-description" class="mdc-dialog__body">
+            	<div class="uploadOuter">
+					 <label for="uploadFile" class="mdc-button">Upload Image</label>
+					 <strong>OR</strong>
+					<dspan class="dragBox" >
+					  Drag and Drop image here
+					<input type="file" onChange="dragNdrop(event)"  ondragover="drag()" ondrop="drop()" id="uploadFile"  />
+					</span>
+				</div>
+				<div id="preview" class="sample-pic-row"></div>
+            </section>
+            <footer class="mdc-dialog__footer">
+              <button type="button" id="cancel-pic-change" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--cancel">Cancel</button>
+              <button type="submit" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept mdc-dialog__action">Change</button>
+              </form>
 
-	  <main id="content" style="display:block; padding-left: 20%; margin-top: -15%;">
+            </footer>
+          </div>
+        </aside>
+
+	  <main id="content" style="display:block; padding-left: 20%; margin-top: -24%;">
 	  	
 	  </main>
 	        <script src="../material-components-web/dist/material-components-web.js"></script>
+	        <script>
+	        function dragNdrop(event) {
+			    var fileName = URL.createObjectURL(event.target.files[0]);
+			    var preview = document.getElementById("preview");
+			    var previewImg = document.createElement("img");
+			    previewImg.style.backgroundImage =  "url("+fileName+")";
+			    previewImg.setAttribute("class","circle")
+			    preview.innerHTML = "";
+			    preview.appendChild(previewImg);
+			}
+			function drag() {
+			    document.getElementById('uploadFile').parentNode.className = 'draging dragBox';
+			}
+			function drop() {
+			    document.getElementById('uploadFile').parentNode.className = 'dragBox';
+		 	}
+		   </script>
 </body>
 
 </html>

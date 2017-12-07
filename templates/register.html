@@ -28,53 +28,59 @@
                     <h1 class="mdc-card__title mdc-card__title--large">Register for Society Thinks</h1>
                     <h2 class="mdc-card__subtitle">Don't lie, we know you are excited to get started!</h2>
                     <br>
-                    <h4 class="mdc-card__subtitle">All Fields Are Required</h4>
+                    <h4 class="mdc-card__subtitle">* Denotes Required Field</h4>
 
                   </section>
                <form id="register-form">
                   <section class="mdc-card__supporting-text">
-                      <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                      *<div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
                         <input type="text" class="mdc-text-field__input" id="fname">
                         <label for="fname" class="mdc-text-field__label">First Name</label>
                       </div>
-                      <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                      *<div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
                         <input type="text" class="mdc-text-field__input" id="lname">
                         <label for="lname" class="mdc-text-field__label">Last Name</label>
                         <i class="material-icons"></i>
                       </div>
-                      <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                      <br>
+                      *<div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
                         <input type="text" class="mdc-text-field__input" id="email">
                         <label for="lname" class="mdc-text-field__label">Email</label>
                         <i class="material-icons" id="email-status"></i>
                       </div>
                       <div style="display:none;color: red; font-weight: 800; width:200%;" id="email-error-txt"></div>
                       <br>
-                      <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                      *<div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
                         <input type="text" class="mdc-text-field__input" id="username">
                         <label for="username" class="mdc-text-field__label">Username</label>
                         <i class="material-icons" id="username-status"></i>
                       </div> 
                       <div style="display:none;color: red; font-weight: 800; width:200%;" id="username-error-txt"></div>   
                       <br>                                        
-                      <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                      *<div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
                         <input type="password" class="mdc-text-field__input" id="password">
                         <label for="password" class="mdc-text-field__label">Password</label>
                         <i class="material-icons" id="password1-status"></i>
                       </div>
-                      <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                      *<div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
                         <input type="password" class="mdc-text-field__input" id="password2">
                         <label for="password2" class="mdc-text-field__label">Confirm Password</label>
                         <i class="material-icons" id="password-status"></i>
                       </div>
-                      <div class="mdc-form-field" style="margin-top: 4%;">
+                      <br>
+                      *<div class="mdc-form-field" style="margin-top: 4%;">
                         <label style="color:rgba(0, 0, 0, 0.5); margin-right: 2%;" for="birthday">Birthday</label> 
                         <input type="date" id="birthday">
                         <i class="material-icons"></i>
                       </div>
-                      <div style="display:none;color: red; font-weight: 800; width:200%;" id="birthday-error-txt">test</div>  
+                      <div style="display:none;color: red; font-weight: 800; width:200%;" id="birthday-error-txt"></div>  
+                      <div class="mdc-form-field" style="margin-top: 4%;">
+                        <label style="color:rgba(0, 0, 0, 0.5); margin-right: 2%; width: 10%;" for="pro-pic">Pro Pic</label> 
+                        <input type="file" id="pro-pic">
+                      </div>
                       <br>
                       <br>
-                      <div class="mdc-select mdc-select0" role="listbox" tabindex="0" id="race-input">
+                      *<div class="mdc-select mdc-select0" role="listbox" tabindex="0" id="race-input">
                         <span class="mdc-select__selected-text">Race</span>
                           <div class="mdc-simple-menu mdc-select__menu">
                             <ul class="mdc-list mdc-simple-menu__items">
@@ -105,7 +111,7 @@
                       <i class="material-icons" style="color:green"></i>
                       <br>
                       <br>
-                      <div class="mdc-select mdc-select1" role="listbox" tabindex="0" id="religion-input">
+                      *<div class="mdc-select mdc-select1" role="listbox" tabindex="0" id="religion-input">
                         <span class="mdc-select__selected-text">Religion</span>
                           <div class="mdc-simple-menu mdc-select__menu">
                             <ul class="mdc-list mdc-simple-menu__items">
@@ -140,7 +146,7 @@
 
                       <br>
                       <br>
-                      <div class="mdc-select mdc-select2" role="listbox" tabindex="0" id="gender-input">
+                      *<div class="mdc-select mdc-select2" role="listbox" tabindex="0" id="gender-input">
                         <span class="mdc-select__selected-text">Gender</span>
                           <div class="mdc-simple-menu mdc-select__menu">
                             <ul class="mdc-list mdc-simple-menu__items">
@@ -163,7 +169,7 @@
 
                       <br>
                       <br>
-                      <div class="mdc-select mdc-select3" role="listbox" tabindex="0" id="country-input">
+                      *<div class="mdc-select mdc-select3" role="listbox" tabindex="0" id="country-input">
                         <span class="mdc-select__selected-text">Country</span>
                           <div class="mdc-simple-menu mdc-select__menu">
                             <ul class="mdc-list mdc-simple-menu__items">

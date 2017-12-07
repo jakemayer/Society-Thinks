@@ -21,6 +21,31 @@ $( document ).ready(function() {
 		});
 
 	}
+
+	$("#register-form").submit(function(e) {
+		e.preventDefault();
+		let fname = e.target[0].value;
+		let lname = e.target[1].value;
+		let email = e.target[2].value;
+		let username = e.target[3].value;
+		$.ajax({
+		  url: "http://0.0.0.0:8000/user.php/update/"+$.cookie("uid"),
+		  method: "POST",
+		  data: {
+		  	fname:fname,
+		  	lname:lname,
+		  	email:email,
+		  	username:username,
+		  	uuid: $.cookie("uuid")
+		  },
+		  dataType: "json"
+		}).done(function(response) {
+			location.reload();
+		}).fail(function(error) {
+			console.log(error); //log them out or something
+		});
+	});
+
 	function check_register() {
 		if($(".green").length > 0) {
 			$("#update-button").prop("disabled",false);
@@ -63,7 +88,7 @@ $( document ).ready(function() {
 			  		},
 			  dataType: "json"
 		}).done(function(response) {
-			if(response['status'] && value.length != 0 && value.indexOf("@") != -1) 
+			if(response['status'] && value.length != 0 && value.indexOf("@") != -1 && (value.indexOf(".com") != -1 || value.indexOf(".net") != -1 || value.indexOf(".edu") != -1)) 
 			{
 				$("#email-status").text("check_circle");
 				$("#email-status").css("color","green");
