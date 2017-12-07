@@ -1,6 +1,18 @@
 $( document ).ready(function() {
 	mdc.autoInit();
 
+	$.ajax({
+		  url: "home.html",
+		  method: "GET",
+		  dataType: "text",
+		  success: function(response) {
+		  	$("#content").html(response);
+		  } ,
+		  error: function(error) {
+
+		  }
+	});
+
     const MDCDialog = mdc.dialog.MDCDialog;
 	const MDCDialogFoundation = mdc.dialog.MDCDialogFoundation;
 	const util = mdc.dialog.util;
@@ -96,16 +108,19 @@ $( document ).ready(function() {
 	$(".router").click(function(e) {
 		e.preventDefault();
 		page = $(this).attr('href');
-		router(page);
+		router(page,this);
 	});
 
-	function router(page) {
+	function router(page,_this) {
+		$(".router").removeClass("mdc-permanent-drawer--selected");
+		$(_this).addClass("mdc-permanent-drawer--selected");
 		$.ajax({
 		  url: page,
 		  method: "GET",
 		  dataType: "text",
 		  success: function(response) {
 		  	$("#content").html(response);
+
 		  } ,
 		  error: function(error) {
 
