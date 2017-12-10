@@ -7,10 +7,8 @@
 #recent_activity {
   color: #444444;
   width: 97%;
-  height: 30%;
-  border: 5px solid #ABCDEF;
   border-radius: 10px;
-  height: 100%;
+
 }
 #question_of_day {
   width: 100%;
@@ -32,4 +30,10 @@
   height: 140px;
   background: #BBBBBB;
   margin-left: 3%;
+}
+
+.recent_activity_header {
+  background-color: #3f51b5;
+  color: white;
+  text-align: center;
 }
