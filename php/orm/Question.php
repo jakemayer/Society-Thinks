@@ -37,9 +37,9 @@ class Question
 
   public static function filterQuestions($user_id,$string,$date) {
      $mysqli = Question::connect();
-     $query = "Select *, CASE WHEN q.asked_by = ".$user_id." THEN 1 ELSE 0 END as is_yours from Final_Question q";
+     $query = "Select *, CASE WHEN q.asked_by = ".$user_id." THEN 1 ELSE 0 END as is_yours from Final_Question q join Final_User u on u.id = asked_by";
      if($string != null) {
-      
+
      } 
      $result = $mysqli->query($query);
      $array = array();
