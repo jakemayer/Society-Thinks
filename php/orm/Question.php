@@ -34,5 +34,21 @@ class Question
     }
     return $array;
   }
+
+  public static function filterQuestions($user_id,$string,$date) {
+     $mysqli = Question::connect();
+     $query = "Select *, CASE WHEN q.asked_by = ".$user_id." THEN 1 ELSE 0 END as is_yours from Final_Question q";
+     if($string != null) {
+      
+     } 
+     $result = $mysqli->query($query);
+     $array = array();
+      if($result) {
+        while($next_row = $result->fetch_array()) {
+          $array[] = $next_row;
+        }
+      }
+      return $array;
+     }
 }
 ?>
