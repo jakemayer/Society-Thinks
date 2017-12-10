@@ -3,10 +3,13 @@ header("Access-Control-Allow-Origin: *");
 date_default_timezone_set('America/New_York');
 require_once('orm/Tokens.php');
 require_once('orm/User.php');
-$path_components = explode('/', $_SERVER['PATH_INFO']);
+
+$path_components = array();
+if (isset($_SERVER['PATH_INFO']))
+	$path_components = explode('/', $_SERVER['PATH_INFO']);
 
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
-	if(count($path_components) > 0 && $path_components[1] == "logout") {
+	if(count($path_components) > 1 && $path_components[1] == "logout") {
 		if(count($_GET == 1) && $_GET['user'] != null) {
 			$response = Token::logout($_GET['user']);
 			if($response) {
