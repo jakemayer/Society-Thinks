@@ -9,9 +9,6 @@ $( document ).ready(function() {
 
 
 	$("#login-btn").click(function() {
-		if($.cookie("uuid") != null && $.cookie("uid") !=null) {
-			window.location.replace("templates/app.html");
-		} 
 		login_dialog.show();
 	});
 
