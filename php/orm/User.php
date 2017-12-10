@@ -57,6 +57,29 @@ class User
     }
   }
 
+  public static function getUserData($id) {
+    $mysqli = User::connect();
+    $response_rate_query = "SELECT COUNT(DISTINCT R.id)/COUNT(DISTINCT V.id) AS rate
+                            FROM Final_Question Q, Final_Response R, Final_Views V
+                            WHERE R.question = V.question AND V.question = " . $id;
+    $questions_asked_query = "SELECT COUNT(*) AS count
+                              FROM Final_Question
+                              WHERE asked_by = " . $id;
+    $questions_resp_query = "SELECT COUNT(*) AS count
+                              FROM Final_Response
+                              WHERE responded_by = " . $id;
+
+    $response_rate = $mysqli->query($response_rate_query)->fetch_array()['rate'];
+    $questions_asked = $mysqli->query($questions_asked_query)->fetch_array()['count'];
+    $questions_resp = $mysqli->query($questions_resp_query)->fetch_array()['count'];
+    $points = 100 + 25*$questions_resp - 50*$questions_asked;
+
+    return array('response_rate' => $response_rate,
+                 'asked_count' => $questions_asked,
+                 'responded_count' => $questions_resp,
+                 'points' => $points);
+  }
+
   public static function checkUnique($type,$value) {
     $mysqli = User::connect();
     $query = "SELECT * from Final_User where ".$type." = '".$value."'";
