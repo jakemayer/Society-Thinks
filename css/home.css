@@ -10,12 +10,72 @@
   border-radius: 10px;
 
 }
-#question_of_day {
+#question_of_day--wrapper {
   width: 100%;
   height: 150px;
   text-align: center;
   font: 18pt bold arial, sans-serif;
   color: #444444;
+}
+
+#question_of_day_text:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+  font-weight: 800;
+}
+
+#question_of_day_text {
+  transition: all .2s ease-in-out;
+}
+
+.question_of_the_day_header {
+  font-size: 12px;
+  text-align: center;
+  margin-left: 31%;
+  padding-top: 2%;
+  font-weight: 800;
+}
+
+.question_of_day--banner {
+  margin-left: 10%;
+  position: absolute;
+  display: block;
+  width: 400px;
+  height: 60px;
+  border: 1px solid #3f51b5;
+  text-align: center;
+  color: white;
+  background:#3f51b5;
+  border-radius: 4px;
+  box-shadow: 0 0 30px rgba(0,0,0,.15) inset,
+              0 6px 10px rgba(0,0,0,.15);
+}
+.question_of_day--banner::before,
+.question_of_day--banner::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  left: -70px;
+  top: 24px;
+  display: block;
+  width: 40px;
+  height: 0px;
+  border: 30px solid #3f51b5;
+  border-right: 20px solid #3f40b5;
+  border-bottom-color: #3f51b5;
+  border-left-color: transparent;
+  transform: rotate(-5deg);
+}
+.question_of_day--banner::after {
+  left: auto;
+  right: -70px;
+  border-left: 20px solid #3f40b5;
+  border-right: 30px solid transparent;
+  transform: rotate(5deg);
+}
+
+.question_of_the_day_header {
+  float: left;
 }
 #points_display {
   width: 100%;
