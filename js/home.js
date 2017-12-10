@@ -58,7 +58,7 @@ $( document ).ready(function() {
 				$("#stat_box1").empty().append("Response Rate: " + response['response_rate']);
 				$("#stat_box2").empty().append("Questions Asked: " + response['asked_count']);
 				$("#stat_box3").empty().append("Questions Answered: " + response['responded_count']);
-				$("#stat_box4").empty().append("Points: " + response['points']);
+				$(".points-content").empty().append(response['points']);
 			}).fail(function(error) {
 				console.log(error);
 			});
