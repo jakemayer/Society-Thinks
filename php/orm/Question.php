@@ -35,12 +35,13 @@ class Question
     return $array;
   }
 
-  public static function filterQuestions($user_id,$string,$date) {
+  public static function filterQuestions($user_id,$string) {
      $mysqli = Question::connect();
-     $query = "Select *, CASE WHEN q.asked_by = ".$user_id." THEN 1 ELSE 0 END as is_yours from Final_Question q join Final_User u on u.id = asked_by";
+     $query = "Select *, CASE WHEN q.asked_by = ".$user_id." THEN 1 ELSE 0 END as is_yours from Final_Question q join Final_User u on u.id = asked_by where 1 = 1 ";
      if($string != null) {
-
-     } 
+        $query = $query. "AND question LIKE '%".$string."%' ";
+     }
+     $query = $query. "ORDER BY asked_time desc";
      $result = $mysqli->query($query);
      $array = array();
       if($result) {

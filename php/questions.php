@@ -8,7 +8,7 @@ require_once('orm/Question.php');
 $path_components = explode('/', $_SERVER['PATH_INFO']);
 
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
-	if(count($path_components) >=3 && $path_components[1] != "") {
+	if(count($path_components) >=2 && $path_components[1] != "") {
 		if($path_components[1] == "recent-activity") {
 			$is_authorized = Token::authorizeRequest($path_components[2],$_COOKIE['uuid']);
 			if($is_authorized) {
@@ -24,7 +24,13 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 			$is_authorized = Token::authorizeRequest($_COOKIE['uid'],$_COOKIE['uuid']);
 			if($is_authorized) {
 				header("Content-Type: application/json");
-				print(json_encode(Question::filterQuestions($_COOKIE['uid'],$_GET['string'],$_GET['date'])));
+				if (isset($_COOKIE['uid'])) {
+					$uid = $_COOKIE['uid'];
+				}
+				if (isset($_GET['string'])) {
+					$str = $_GEt['string'];
+				}
+				print(json_encode(Question::filterQuestions($uid, $str)));
 				exit();
 			} else {
 				header("HTTP/1.0 401 Unauthorized");
