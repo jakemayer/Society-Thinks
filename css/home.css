@@ -1,0 +1,39 @@
+.wrapper {
+  width: 100%;
+}
+#user_info {
+  float: left;
+}
+#recent_activity {
+  float: right;
+  padding-top: 6px;
+  margin-top: 18px;
+  margin-right: 8px;
+  text-align: center;
+  font: 18pt bold arial, sans-serif;
+  color: #444444;
+  width: 500px;
+  height: 628px;
+  border: 5px solid #ABCDEF;
+  border-radius: 10px;
+}
+#question_of_day {
+  width: 100%;
+  height: 150px;
+  text-align: center;
+  font: 18pt bold arial, sans-serif;
+  color: #444444;
+}
+#points_display {
+  width: 100%;
+  height: 300px;
+}
+#stats_display {
+  align-content: center;
+}
+.stat_box {
+  display: inline-block;
+  width: 180px;
+  height: 180px;
+  background: #BBBBBB;
+}
