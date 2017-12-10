@@ -6,7 +6,7 @@ $( document ).ready(function() {
 		window.location.replace("index.html");
 	} else {
 		$.ajax({
-		  url: "http://0.0.0.0:8000/php/user.php/"+$.cookie("uid"),
+		  url: "http://localhost:8000/php/user.php/"+$.cookie("uid"),
 		  method: "GET",
 		  dataType: "json"
 		}).done(function(response) {
@@ -29,7 +29,7 @@ $( document ).ready(function() {
 		let email = e.target[2].value;
 		let username = e.target[3].value;
 		$.ajax({
-		  url: "http://0.0.0.0:8000/php/user.php/update/"+$.cookie("uid"),
+		  url: "http://localhost:8000/php/user.php/update/"+$.cookie("uid"),
 		  method: "POST",
 		  data: {
 		  	fname:fname,
@@ -81,7 +81,7 @@ $( document ).ready(function() {
 	$('#email').on('change textInput input', function () {
 		let value = this.value;
 		$.ajax({
-			  url: "http://0.0.0.0:8000/php/user.php/unique-check",
+			  url: "http://localhost:8000/php/user.php/unique-check",
 			  method: "GET",
 			  data: { type: "email",
 			  		  value: this.value
@@ -113,7 +113,7 @@ $( document ).ready(function() {
     $('#username').on('change textInput input', function () {
 		let value = this.value;
 		$.ajax({
-			  url: "http://0.0.0.0:8000/php/user.php/unique-check",
+			  url: "http://localhost:8000/php/user.php/unique-check",
 			  method: "GET",
 			  data: { type: "username",
 			  		  value: this.value

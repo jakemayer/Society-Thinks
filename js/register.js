@@ -75,7 +75,7 @@ $( document ).ready(function() {
 	$('#email').on('change textInput input', function () {
 		let value = this.value;
 		$.ajax({
-			  url: "http://0.0.0.0:8000/php/user.php/unique-check",
+			  url: "http://localhost:8000/php/user.php/unique-check",
 			  method: "GET",
 			  data: { type: "email",
 			  		  value: this.value
@@ -107,7 +107,7 @@ $( document ).ready(function() {
     $('#username').on('change textInput input', function () {
 		let value = this.value;
 		$.ajax({
-			  url: "http://0.0.0.0:8000/php/user.php/unique-check",
+			  url: "http://localhost:8000/php/user.php/unique-check",
 			  method: "GET",
 			  data: { type: "username",
 			  		  value: this.value
@@ -195,7 +195,7 @@ $( document ).ready(function() {
 					console.log("nope");
 				} else {
 					$.ajax({
-					  url: "http://0.0.0.0:8000/php/auth.php",
+					  url: "http://localhost:8000/php/auth.php",
 					  method: "POST",
 					  data: {
 					  	fname:fname,
@@ -213,7 +213,7 @@ $( document ).ready(function() {
 					  dataType: "json"
 					}).done(function(response) {
 						$.ajax({
-						  url: "http://0.0.0.0:8000/php/auth.php",
+						  url: "http://localhost:8000/php/auth.php",
 						  method: "GET",
 						  data: { username: response['username'], password:response['password']},
 						  dataType: "json"
@@ -231,7 +231,7 @@ $( document ).ready(function() {
 					console.log("nope");
 				} else {
 					$.ajax({
-					  url: "http://0.0.0.0:8000/php/auth.php",
+					  url: "http://localhost:8000/php/auth.php",
 					  method: "POST",
 					  data: {
 					  	fname:fname,
@@ -249,7 +249,7 @@ $( document ).ready(function() {
 					  dataType: "json"
 					}).done(function(response) {
 						$.ajax({
-						  url: "http://0.0.0.0:8000/php/auth.php",
+						  url: "http://localhost:8000/php/auth.php",
 						  method: "GET",
 						  data: { username: response['username'], password:response['password']},
 						  dataType: "json"

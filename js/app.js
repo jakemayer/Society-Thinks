@@ -26,7 +26,7 @@ $( document ).ready(function() {
 	} else {
 		$("#overlay").css("display","block");
 		$.ajax({
-		  url: "http://0.0.0.0:8000/php/user.php/"+$.cookie("uid"),
+		  url: "http://localhost:8000/php/user.php/"+$.cookie("uid"),
 		  method: "GET",
 		  dataType: "json"
 		}).done(function(response) {
@@ -63,7 +63,7 @@ $( document ).ready(function() {
 			  dataType: "json"
 			}).done(function(response) {
 				$.ajax({
- 				  url: "http://0.0.0.0:8000/php/user.php/update/"+$.cookie("uid"),
+ 				  url: "http://localhost:8000/php/user.php/update/"+$.cookie("uid"),
 				  method: "POST",
 				  data: {
 				  	pro_pic: response.data['link']
@@ -93,7 +93,7 @@ $( document ).ready(function() {
 	$("#logout-btn").click(function() {
 		$("#overlay").css("display","block");
 		$.ajax({
-		  url: "http://0.0.0.0:8000/php/auth.php/logout?user="+$.cookie("uid"),
+		  url: "http://localhost:8000/php/auth.php/logout?user="+$.cookie("uid"),
 		  method: "GET",
 		  dataType: "json"
 		}).done(function(response) {
