@@ -24,19 +24,27 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 			$is_authorized = Token::authorizeRequest($_COOKIE['uid'],$_COOKIE['uuid']);
 			if($is_authorized) {
 				header("Content-Type: application/json");
-				if (isset($_COOKIE['uid'])) {
-					$uid = $_COOKIE['uid'];
-				}
-				if (isset($_GET['string'])) {
-					$str = $_GEt['string'];
-				}
-				print(json_encode(Question::filterQuestions($uid, $str)));
+				$str = null;
+				if (isset($_GET['string'])) 
+					$str = $_GET['string'];
+				print(json_encode(Question::filterQuestions($_COOKIE['uid'], $str)));
 				exit();
 			} else {
 				header("HTTP/1.0 401 Unauthorized");
 				print("oh no!");
 				exit();
 			}			
+		} else if($path_components[1] = "trending") {
+			$is_authorized = Token::authorizeRequest($_COOKIE['uid'],$_COOKIE['uuid']);
+			if($is_authorized) {
+				header("Content-Type: application/json");
+				print(json_encode(Question::getTrendingQuestion($_COOKIE['uid'])));
+				exit();
+			} else {
+				header("HTTP/1.0 401 Unauthorized");
+				print("oh no!");
+				exit();
+			}
 		}
 	} 
 

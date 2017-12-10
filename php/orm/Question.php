@@ -50,6 +50,18 @@ class Question
         }
       }
       return $array;
-     }
+  }
+
+  public static function getTrendingQuestion($user_id) {
+    $mysqli = Question::connect();
+    $query = "SELECT *, CASE WHEN asked_by = " . $user_id . " THEN 1 ELSE 0 END AS is_yours FROM
+              (SELECT Q.*, COUNT(*)
+               FROM Final_Question Q, Final_Response R
+               WHERE R.question = Q.id
+               GROUP BY Q.id
+               ORDER BY DATE(Q.asked_time) DESC, COUNT(*) DESC
+               LIMIT 2) F";
+    return $mysqli->query($query)->fetch_array();
+  }
 }
 ?>

@@ -11,7 +11,7 @@ $( document ).ready(function() {
 		}
 		$("#overlay").css("display","none");
 	}).fail(function(error) {
-		alert(error.responseText);
+		alert("Fail");
 		console.log(error); //log them out or something
 	});
 });
