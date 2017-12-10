@@ -59,9 +59,15 @@ class User
 
   public static function getUserData($id) {
     $mysqli = User::connect();
-    $response_rate_query = "SELECT COUNT(DISTINCT R.id)/COUNT(DISTINCT V.id) AS rate
-                            FROM Final_Question Q, Final_Response R, Final_Views V
-                            WHERE R.question = V.question AND V.question = " . $id;
+    $response_rate_query = "SELECT (SELECT COUNT(*)
+                                    FROM Final_Question Q, Final_Response R
+                                    WHERE R.question = Q.id
+                                    AND Q.asked_by = " . $id . ")
+                                    /
+                                   (SELECT COUNT(*)
+                                    FROM Final_Question Q, Final_Views V
+                                    WHERE V.question = Q.id
+                                    AND Q.asked_by = " . $id . ") as rate";
     $questions_asked_query = "SELECT COUNT(*) AS count
                               FROM Final_Question
                               WHERE asked_by = " . $id;

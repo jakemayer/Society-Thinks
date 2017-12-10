@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 		}
 		else if($path_components[1] == "user-data") {
 			header("Content-Type: application/json");
-			print(json_encode(User::getUserData($_GET['id'])));
+			print(json_encode(User::getUserData($path_components[2])));
 			exit();
 		}
 		else 
