@@ -26,4 +26,16 @@ $( document ).ready(function() {
 			}).fail(function(error) {
 				console.log(error);
 			});
+
+	$("#overlay").css("display","block");
+			$.ajax({
+			  url: "http://localhost:8000/php/questions.php/trending/",
+			  method: "GET",
+			  dataType: "json"
+			}).done(function(response) {
+				$("#overlay").css("display","none");
+				$("#question_of_day_text").empty().append(response['question']);
+			}).fail(function(error) {
+				console.log(error);
+			});
 });
