@@ -6,7 +6,9 @@ $( document ).ready(function() {
 	  method: "GET",
 	  dataType: "json"
 	}).done(function(response) {
-		createQuestionCard(response['id'], response['question'], response['username'], response['pro_pic'], response['country'], response['asked_time'], response['is_yours']);
+		for(let i = 0; i < response.length; i++) {
+			createQuestionCard(response[i]['id'], response[i]['question'], response[i]['username'], response[i]['pro_pic'], response[i]['country'], response[i]['asked_time'], response[i]['is_yours']);
+		}
 		$("#overlay").css("display","none");
 	}).fail(function(error) {
 		alert(error.responseText);
