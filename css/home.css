@@ -5,15 +5,9 @@
   float: left;
 }
 #recent_activity {
-  float: right;
-  padding-top: 6px;
-  margin-top: 18px;
-  margin-right: 8px;
-  text-align: center;
-  font: 18pt bold arial, sans-serif;
   color: #444444;
-  width: 500px;
-  height: 628px;
+  width: 97%;
+  height: 30%;
   border: 5px solid #ABCDEF;
   border-radius: 10px;
 }
