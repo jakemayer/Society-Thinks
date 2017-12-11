@@ -55,9 +55,9 @@ $( document ).ready(function() {
 			  dataType: "json"
 			}).done(function(response) {
 				$("#overlay").css("display","none");
-				$("#stat_box1").empty().append("Response Rate: " + response['response_rate']);
-				$("#stat_box2").empty().append("Questions Asked: " + response['asked_count']);
-				$("#stat_box3").empty().append("Questions Answered: " + response['responded_count']);
+				$("#stat_box1 > .inner-stat-circle").empty().append(response['response_rate']*100+"%");
+				$("#stat_box2 > .inner-stat-circle").empty().append(response['asked_count']);
+				$("#stat_box3 > .inner-stat-circle").empty().append(response['responded_count']);
 				$(".points-content").empty().append(response['points']);
 			}).fail(function(error) {
 				console.log(error);

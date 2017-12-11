@@ -1,3 +1,30 @@
+.tab-nav {
+  position: fixed;
+  margin:auto;
+  margin-left: 27%;
+}
+
+.inner-stat-circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 100px;
+  background-color: whitesmoke;
+  margin: auto;
+  margin-top: 1%;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 90px;
+  box-shadow: 0 12px 15px rgba(0, 0, 0, 0.16), 0 12px 15px rgba(0, 0, 0, 0.23);
+}
+
+.inner-stat-title {
+  text-align: center;
+  margin-top: 2px;
+  font-size: 10px;
+  font-weight: 300;
+}
+
 .wrapper {
   width: 100%;
 }
@@ -111,12 +138,11 @@
 #stats_display {
   align-content: center;
 }
-#stat_box1, #stat_box2, #stat_box3, #stat_box4 {
+#stat_box1, #stat_box2, #stat_box3 {
   display: inline-block;
-  width: 140px;
+  width: 170px;
   height: 140px;
-  background: #BBBBBB;
-  margin-left: 3%;
+  margin-left: 6%;
 }
 
 .recent_activity_header {

@@ -14,6 +14,19 @@ $( document ).ready(function() {
 		alert("Fail");
 		console.log(error); //log them out or something
 	});
+
+	$("#responded-tab").click(function() {
+		$("#questions-tab").removeClass("mdc-tab--active");
+		$(this).addClass("mdc-tab--active");
+		$(".mdc-tab-bar__indicator").css("transform", "translateX(160px) scale(0.5, 1)");
+	});
+
+	$("#questions-tab").click(function() {
+		$("#responded-tab").removeClass("mdc-tab--active");
+		$(this).addClass("mdc-tab--active");
+		$(".mdc-tab-bar__indicator").css("transform", "translateX(0px) scale(0.5, 1)");
+	});
+
 });
 
 function createQuestionCard(id, question, asker, picture, country, datetime, is_yours){
@@ -33,6 +46,6 @@ function createQuestionCard(id, question, asker, picture, country, datetime, is_
     </section>
   </div>`;
 
-  $("#question_body").append(html_string);
+  $("#question-content").append(html_string);
 
 }
