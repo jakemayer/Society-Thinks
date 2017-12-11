@@ -1,5 +1,11 @@
 $( document ).ready(function() {
 	mdc.autoInit();
+	const MDCDialog = mdc.dialog.MDCDialog;
+	const MDCDialogFoundation = mdc.dialog.MDCDialogFoundation;
+	const util = mdc.dialog.util;
+	var answer_dialog = new mdc.dialog.MDCDialog(document.querySelector('#answer-dialog'));
+
+
 	$("#overlay").css("display","block");
 	$.ajax({
 	  url: "http://localhost:8000/php/questions.php/search",
@@ -7,7 +13,27 @@ $( document ).ready(function() {
 	  dataType: "json"
 	}).done(function(response) {
 		for(let i = 0; i < response.length; i++) {
-			createQuestionCard(response[i]['id'], response[i]['question'], response[i]['username'], response[i]['pro_pic'], response[i]['country'], response[i]['asked_time'], response[i]['is_yours']);
+			createQuestionCard(response[i][0], response[i]['question'], response[i]['username'], response[i]['pro_pic'], response[i]['country'], response[i]['asked_time'], response[i]['is_yours']);
+			$("#Q"+response[i][0]+"-answers").click(function(){
+			  	$.ajax({
+					 url: "http://localhost:8000/php/questions.php/answers/"+response[i][0],
+						  method: "GET",
+						  dataType: "json"
+				}).done(function(response) {
+					$("#question-title").text(response[0]['question']);
+					$("#answer-footer").html("");
+					for(let i = 0; i < response.length; i++) {
+						$("#answer-footer").prepend(`<button style="margin-left:1%;" type="button" 
+							class="mdc-button 
+							mdc-button mdc-button--raised mdc-ripple-upgraded
+							">`+response[i]['answer']+`
+							</button>`)
+					}
+				}).fail(function(error){
+					console.log(error);
+				});
+			  	answer_dialog.show();
+			});
 		}
 		$("#overlay").css("display","none");
 	}).fail(function(error) {
@@ -36,7 +62,10 @@ $( document ).ready(function() {
 		}).done(function(response) {
 			$("#question-content").html("");
 			for(let i = 0; i < response.length; i++) {
-				createQuestionCard(response[i]['id'], response[i]['question'], response[i]['username'], response[i]['pro_pic'], response[i]['country'], response[i]['asked_time'], response[i]['is_yours']);
+				createQuestionCard(response[i][0], response[i]['question'], response[i]['username'], response[i]['pro_pic'], response[i]['country'], response[i]['asked_time'], response[i]['is_yours']);
+				  $("#Q"+response[i][0]+"-answers").click(function(){
+				  	answer_dialog.show();
+				  });
 			}
 			$("#overlay").css("display","none");
 		}).fail(function(error) {
@@ -59,11 +88,10 @@ function createQuestionCard(id, question, asker, picture, country, datetime, is_
       <img class="mdc-card__media-item" src="` + picture + `">
     </div>
     <section class="mdc-card__actions">
-      <button class="mdc-button mdc-button--compact mdc-card__action">Answer Question</button>
-      <button class="mdc-button mdc-button--compact mdc-card__action">View Results</button>
+      <button id="Q`+id+`-answers" class="mdc-button mdc-button--compact mdc-card__action">Answer Question</button>
+      <button id="Q`+id+`-results" class="mdc-button mdc-button--compact mdc-card__action">View Results</button>
     </section>
   </div>`;
 
   $("#question-content").append(html_string);
-
 }

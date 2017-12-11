@@ -63,5 +63,18 @@ class Question
                LIMIT 2) F";
     return $mysqli->query($query)->fetch_array();
   }
+
+  public static function getQuestionAndAnswers($question_id) {
+    $mysqli = Question::connect();
+    $query = "SELECT * from Final_Answer a join Final_Question q on a.question = q.id where a.question = ".$question_id;
+    $result = $mysqli->query($query);
+    $array = array();
+      if($result) {
+        while($next_row = $result->fetch_array()) {
+          $array[] = $next_row;
+        }
+      }
+      return $array;
+  }
 }
 ?>

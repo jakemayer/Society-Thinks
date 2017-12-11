@@ -34,11 +34,22 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 				print("oh no!");
 				exit();
 			}			
-		} else if($path_components[1] = "trending") {
+		} else if($path_components[1] == "trending") {
 			$is_authorized = Token::authorizeRequest($_COOKIE['uid'],$_COOKIE['uuid']);
 			if($is_authorized) {
 				header("Content-Type: application/json");
 				print(json_encode(Question::getTrendingQuestion($_COOKIE['uid'])));
+				exit();
+			} else {
+				header("HTTP/1.0 401 Unauthorized");
+				print("oh no!");
+				exit();
+			}
+		} else if($path_components[1] == "answers") {
+			$is_authorized = Token::authorizeRequest($_COOKIE['uid'],$_COOKIE['uuid']);
+			if($is_authorized) {
+				header("Content-Type: application/json");
+				print(json_encode(Question::getQuestionAndAnswers($path_components[2])));
 				exit();
 			} else {
 				header("HTTP/1.0 401 Unauthorized");
