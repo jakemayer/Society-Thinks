@@ -2,7 +2,7 @@ $( document ).ready(function() {
 	mdc.autoInit();
 	$("#overlay").css("display","block");
 	$.ajax({
-	  url: "http://localhost:8000/php/questions.php/search/",
+	  url: "http://localhost:8000/php/questions.php/search",
 	  method: "GET",
 	  dataType: "json"
 	}).done(function(response) {
@@ -27,12 +27,30 @@ $( document ).ready(function() {
 		$(".mdc-tab-bar__indicator").css("transform", "translateX(0px) scale(0.5, 1)");
 	});
 
+	$("#search-bar").on('change input', function () {
+		$("#overlay").css("display","block");
+		$.ajax({
+		  url: "http://localhost:8000/php/questions.php/search?string="+this.value,
+		  method: "GET",
+		  dataType: "json"
+		}).done(function(response) {
+			$("#question-content").html("");
+			for(let i = 0; i < response.length; i++) {
+				createQuestionCard(response[i]['id'], response[i]['question'], response[i]['username'], response[i]['pro_pic'], response[i]['country'], response[i]['asked_time'], response[i]['is_yours']);
+			}
+			$("#overlay").css("display","none");
+		}).fail(function(error) {
+			alert("Fail");
+			console.log(error); //log them out or something
+		});
+	});
+
 });
 
 function createQuestionCard(id, question, asker, picture, country, datetime, is_yours){
 
   var html_string = `
-  <div id="` + "Q" + id + `" class="mdc-card demo-card">
+  <div id="` + "Q" + id + `" class="mdc-card">
   	<div class="mdc-card__horizontal-block">
       <section class="mdc-card__primary">
         <h1 class="mdc-card__title mdc-card__title--large">` + question + `</h1>
