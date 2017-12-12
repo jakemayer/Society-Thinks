@@ -1,7 +1,7 @@
 <div id="question_body">
 	<nav id="basic-tab-bar" class="mdc-tab-bar mdc-tab-bar-upgraded tab-nav">
-	    <a class="mdc-tab mdc-ripple-upgraded mdc-tab--active" id="questions-tab" href="#one" >Questions</a>
-	    <a class="mdc-tab mdc-ripple-upgraded" id="responded-tab" href="#two" >Responded To</a>
+	    <a class="mdc-tab mdc-ripple-upgraded mdc-tab--active" id="questions-tab" >Questions</a>
+	    <a class="mdc-tab mdc-ripple-upgraded" id="responded-tab" >Responded To</a>
 
 	    <span class="mdc-tab-bar__indicator" style="transform: translateX(0px) scale(0.5, 1); visibility: visible;"></span>
 	 </nav>
@@ -9,17 +9,16 @@
 	 	<div><input type="text" id="search-bar" placeholder="Search for Questions"><i class="material-icons" style="position:absolute;margin-left: -2.4%;margin-top: .7%;">search</i></div>
 	 	
 	  </div>
+
+	 <div id="question-content" style="padding-top: 10%;">
 	 	<div id="questions-overlay">
       		<div class="questions-loading"></div>
 		</div>
 	 	
-	 <div id="question-content" style="padding-top: 10%;">
-
 	 </div>
 	  <aside class="mdc-dialog" id="answer-dialog">
           <div class="mdc-dialog__surface">
             <header class="mdc-dialog__header">
-            <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--cancel" style="float:right">Cancel</button>
 
               <h2 id="question-title" class="mdc-dialog__header__title">
                 
@@ -28,6 +27,7 @@
             <form id="answer-form">
             <section id="answer-footer" class="mdc-dialog__body">
             </section>
+             <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--cancel" style="float:right">Cancel</button>
        		 </form>
           </div>
      </aside>
