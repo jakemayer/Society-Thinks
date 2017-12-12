@@ -54,7 +54,7 @@ $( document ).ready(function() {
 	});
 
 	$("#search-bar").on('change input', function () {
-		$("#overlay").css("display","block");
+		$("#questions-overlay").css("display","block");
 		$.ajax({
 		  url: "http://localhost:8000/php/questions.php/search?string="+this.value,
 		  method: "GET",
@@ -67,7 +67,7 @@ $( document ).ready(function() {
 				  	answer_dialog.show();
 				  });
 			}
-			$("#overlay").css("display","none");
+			$("#questions-overlay").css("display","none");
 		}).fail(function(error) {
 			alert("Fail");
 			console.log(error); //log them out or something
