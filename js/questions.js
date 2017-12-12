@@ -79,13 +79,14 @@ $( document ).ready(function() {
 function createQuestionCard(id, question, asker, picture, country, datetime, is_yours){
 
   var html_string = `
-  <div id="` + "Q" + id + `" class="mdc-card">
+  <div id="` + "Q" + id + `" class="mdc-card question-card" style="background-color:white">
+  	<div class="country-banner"> <div class="banner-flag" style="background-image: url(http://flags.fmcdn.net/data/flags/w580/`+country+`.png);"></div></div>
   	<div class="mdc-card__horizontal-block">
       <section class="mdc-card__primary">
         <h1 class="mdc-card__title mdc-card__title--large">` + question + `</h1>
         <h2 class="mdc-card__subtitle">` + "Asked by " + asker + `</h2>
       </section>
-      <img class="mdc-card__media-item" src="` + picture + `">
+      <div class="pic-row" style="width:10%;"><img class="circle" style="background-image:url(`+picture+`)"/> </div>
     </div>
     <section class="mdc-card__actions">
       <button id="Q`+id+`-answers" class="mdc-button mdc-button--compact mdc-card__action">Answer Question</button>
