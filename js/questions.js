@@ -41,16 +41,29 @@ $( document ).ready(function() {
 		console.log(error); //log them out or something
 	});
 
-	$("#responded-tab").click(function() {
+	$("#my-tab").click(function() {
 		$("#questions-tab").removeClass("mdc-tab--active");
+		$("#questions-tab").attr("active","false");
 		$(this).addClass("mdc-tab--active");
+		$(this).attr("active","true");
 		$(".mdc-tab-bar__indicator").css("transform", "translateX(160px) scale(0.5, 1)");
+
+		$(".question-card").each(function(i,card) {
+			if($(card).attr("is_yours") == 0) {
+				$(card).css("display","none");
+			}
+		});
 	});
 
 	$("#questions-tab").click(function() {
-		$("#responded-tab").removeClass("mdc-tab--active");
+		$("#my-tab").removeClass("mdc-tab--active");
+		$("#my-tab").attr("active","false");		
 		$(this).addClass("mdc-tab--active");
+		$(this).attr("active","true");
 		$(".mdc-tab-bar__indicator").css("transform", "translateX(0px) scale(0.5, 1)");
+		$(".question-card").each(function(i,card) {
+			$(card).css("display","block");
+		});
 	});
 
 	$("#search-bar").on('change input', function () {
@@ -65,7 +78,14 @@ $( document ).ready(function() {
 				createQuestionCard(response[i][0], response[i]['question'], response[i]['username'], response[i]['pro_pic'], response[i]['country'], response[i]['asked_time'], response[i]['is_yours']);
 				  $("#Q"+response[i][0]+"-answers").click(function(){
 				  	answer_dialog.show();
-				  });
+				 });
+			}
+			if($("#my-tab").attr("active")=="true"){
+				$(".question-card").each(function(i,card) {
+					if($(card).attr("is_yours") == 0) {
+						$(card).css("display","none");
+					}
+				});
 			}
 			$("#questions-overlay").css("display","none");
 		}).fail(function(error) {
@@ -79,7 +99,7 @@ $( document ).ready(function() {
 function createQuestionCard(id, question, asker, picture, country, datetime, is_yours){
 
   var html_string = `
-  <div id="` + "Q" + id + `" class="mdc-card question-card" style="background-color:white">
+  <div id="` + "Q" + id + `" class="mdc-card question-card" style="background-color:white" is_yours=`+is_yours+`>
   	<div class="country-banner"> <div class="banner-flag" style="background-image: url(http://flags.fmcdn.net/data/flags/w580/`+country+`.png);"></div></div>
   	<div class="mdc-card__horizontal-block">
       <section class="mdc-card__primary">
