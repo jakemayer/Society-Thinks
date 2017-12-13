@@ -10,13 +10,15 @@
 
 #results-dialog h2 {
 	font-size: 10px;
+	text-align: center;
 }
 
 #filter-results {
 	margin-top: -1%;
 }
 
-.mdc-form-field {
+
+.mdc-checkbox {
 	transform: scale(.7);
 }
 
