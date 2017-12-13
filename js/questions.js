@@ -41,6 +41,86 @@ $( document ).ready(function() {
 			$("#Q"+response[i][0]+"-results").click(function(){
 				$("#results-header").text(response[i]['question']);
 				$("#results-header").attr("qid",response[i][0]);
+				let genderFilter = [];
+				let raceFilter = [];
+				let religionFilter = [];
+				let countryFilter = [];
+
+				$("#gender-filter input").each(function(i, el) {
+					if(el.checked == true) {
+						genderFilter.push(el.id);
+					}
+				});
+				$("#race-filter input").each(function(i, el) {
+					if(el.checked == true) {
+						raceFilter.push(el.id);
+					}
+				});
+				$("#country-filter input").each(function(i, el) {
+					if(el.checked == true) {
+						countryFilter.push(el.id);
+					}
+				});
+				$("#religion-filter input").each(function(i, el) {
+					if(el.checked == true) {
+						religionFilter.push(el.id);
+					}
+				});
+				let min_age = $("#age_min").val();
+				let max_age = $("#age_max").val();
+
+				let data = {
+					genders:genderFilter,
+					races:raceFilter,
+					religions:religionFilter,
+					countries:countryFilter,
+					minAge: min_age,
+					maxAge:max_age
+				}
+				$.ajax({
+					url:"http://localhost:8000/php/response.php/"+response[i][0],
+					method: "GET",
+					dataType:"json",
+					data: data
+				}).done(function(response) {
+					ctx = $("#chart");
+					let labels = [];
+					let data = [];
+					response.forEach(function(obj) {
+						labels.push(obj['answer']);
+						data.push(obj['count']);
+					});
+					console.log(labels);
+					console.log(data);
+					var myChart = new Chart(ctx, {
+					    type: 'doughnut',
+					    data: {
+					        labels: labels,
+					        datasets: [{
+					            data: data,
+					            backgroundColor: [
+					                'rgba(255, 99, 132, 0.2)',
+					                'rgba(54, 162, 235, 0.2)',
+					                'rgba(255, 206, 86, 0.2)',
+					                'rgba(75, 192, 192, 0.2)',
+					                'rgba(153, 102, 255, 0.2)',
+					                'rgba(255, 159, 64, 0.2)'
+					            ],
+					            borderColor: [
+					                'rgba(255,99,132,1)',
+					                'rgba(54, 162, 235, 1)',
+					                'rgba(255, 206, 86, 1)',
+					                'rgba(75, 192, 192, 1)',
+					                'rgba(153, 102, 255, 1)',
+					                'rgba(255, 159, 64, 1)'
+					            ],
+					            borderWidth: 1
+					        }]
+					    },
+					});
+				}).fail(function(error) {
+					console.log(error);
+				});
 				results_dialog.show();
 			});
 		}
@@ -163,7 +243,41 @@ $("#filter-form").change(function(e) {
 		dataType:"json",
 		data: data
 	}).done(function(response) {
-		console.log(response);
+			ctx = $("#chart");
+			let labels = [];
+			let data = [];
+			response.forEach(function(obj) {
+				labels.push(obj['answer']);
+				data.push(obj['count']);
+			});
+			console.log(labels);
+			console.log(data);
+			var myChart = new Chart(ctx, {
+			    type: 'doughnut',
+			    data: {
+			        labels: labels,
+			        datasets: [{
+			            data: data,
+			            backgroundColor: [
+			                'rgba(255, 99, 132, 0.2)',
+			                'rgba(54, 162, 235, 0.2)',
+			                'rgba(255, 206, 86, 0.2)',
+			                'rgba(75, 192, 192, 0.2)',
+			                'rgba(153, 102, 255, 0.2)',
+			                'rgba(255, 159, 64, 0.2)'
+			            ],
+			            borderColor: [
+			                'rgba(255,99,132,1)',
+			                'rgba(54, 162, 235, 1)',
+			                'rgba(255, 206, 86, 1)',
+			                'rgba(75, 192, 192, 1)',
+			                'rgba(153, 102, 255, 1)',
+			                'rgba(255, 159, 64, 1)'
+			            ],
+			            borderWidth: 1
+			        }]
+			    },
+			});	
 	}).fail(function(error) {
 		console.log(error);
 	});

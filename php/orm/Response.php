@@ -19,7 +19,7 @@ class Response
     $gender_list = Response::getCommaSeparatedList($genders);
     $start_date  = date("Y-m-d", mktime(0, 0, 0, date("m"),   date("d"),   date("Y")-$max_age-1));
     $end_date = date("Y-m-d", mktime(0, 0, 0, date("m"),   date("d"),   date("Y")-$min_age));
-    $query = "SELECT A.answer, COUNT(*)
+    $query = "SELECT A.answer, COUNT(*) as count
               FROM Final_Response R, Final_User U, Final_Answer A
               WHERE R.question = " . $question_id . "
               AND R.answer = A.id
@@ -27,11 +27,13 @@ class Response
               AND U.race IN " . $race_list . "
               AND U.religion IN " . $religion_list . "
               AND U.country IN " . $country_list . "
-              AND U.gender IN " . $gender_list . "
-              AND U.birthday > '" . $start_date . "'
-              AND U.birthday <= '" . $end_date . "'
-              GROUP BY A.id";
-              
+              AND U.gender IN " . $gender_list;
+    if ($min_age != null)
+      $query .= "AND U.birthday > '" . $start_date . "'";
+    if ($max_age != null)
+      $query .= "AND U.birthday <= '" . $end_date . "'";
+    
+    $query .= "GROUP BY A.id";
     $result = $mysqli->query($query);
     $array = array();
     if($result) {
