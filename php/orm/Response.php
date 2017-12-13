@@ -11,7 +11,38 @@ class Response
 		      "marclanedb");
   }
 
-  
+  public static function getResponseData($question_id, $races, $religions, $countries, $genders, $min_age, $max_age){
+    $mysqli = Response::connect();
+    $race_list = Response::getCommaSeparatedList($races);
+    $religion_list = Response::getCommaSeparatedList($religions);
+    $country_list = Response::getCommaSeparatedList($countries);
+    $gender_list = Response::getCommaSeparatedList($genders);
+    $start_date  = date("Y-m-d", mktime(0, 0, 0, date("m"),   date("d"),   date("Y")-$max_age-1));
+    $end_date = date("Y-m-d", mktime(0, 0, 0, date("m"),   date("d"),   date("Y")-$min_age));
+    $query = "SELECT A.answer, COUNT(*)
+              FROM Final_Response R, Final_User U, Final_Answer A
+              WHERE R.question = " . $question_id . "
+              AND R.answer = A.id
+              AND R.responded_by = U.id
+              AND U.race IN " . $race_list . "
+              AND U.religion IN " . $religion_list . "
+              AND U.country IN " . $country_list . "
+              AND U.gender IN " . $gender_list . "
+              AND U.birthday > " . $start_date . "
+              AND U.birthday <= " . $end_date . "
+              GROUP BY A.id";
+    return $mysqli->query($query);
+  }
+
+  public static function getCommaSeparatedList($array){
+    if (count($array) == 0)
+      return "(null)";
+    $list = "(";
+    for ($i = 0; $i < count($array) - 1; $i++)
+      $list .= $array[$i] . ", ";
+    return $list . $array[count($array)-1] . ")";
+  }
+
   public static function getRecentActivity($id) {
     $mysqli = Question::connect();
     $query = "SELECT q.id, q.question,q.asked_time, r.responded_time, 1 as is_response
