@@ -118,6 +118,9 @@ $( document ).ready(function() {
 					        }]
 					    },
 					});
+					
+
+
 				}).fail(function(error) {
 					console.log(error);
 				});
@@ -281,7 +284,11 @@ $("#filter-form").change(function(e) {
 	}).fail(function(error) {
 		console.log(error);
 	});
+
+	$(window).scroll(function(){alert("WINDOW SCROLLED");});
 });
+
+var viewed_cards = [];
 
 function createQuestionCard(id, question, asker, picture, country, datetime, is_yours){
 
@@ -302,4 +309,25 @@ function createQuestionCard(id, question, asker, picture, country, datetime, is_
   </div>`;
 
   $("#question-content").append(html_string);
+  $("#Q"+id).scroll(function(){
+		alert("SCROLL");
+		if (!viewed_cards.includes(card) && inViewport(document.getElementById("Q"+id))){
+			alert(card + " viewed");
+			viewed_cards.push(card);
+		}
+	});
+}
+
+function inViewport(el){
+    var r, html;
+    if ( !el || 1 !== el.nodeType ) { return false; }
+    html = document.documentElement;
+    r = el.getBoundingClientRect();
+
+    return ( !!r 
+      && r.bottom >= 0 
+      && r.right >= 0 
+      && r.top <= html.clientHeight 
+      && r.left <= html.clientWidth 
+    );
 }
