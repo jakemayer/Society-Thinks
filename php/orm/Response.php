@@ -28,10 +28,10 @@ class Response
               AND U.religion IN " . $religion_list . "
               AND U.country IN " . $country_list . "
               AND U.gender IN " . $gender_list . "
-              AND U.birthday > " . $start_date . "
-              AND U.birthday <= " . $end_date . "
+              AND U.birthday > '" . $start_date . "'
+              AND U.birthday <= '" . $end_date . "'
               GROUP BY A.id";
-    return $mysqli->query($query);
+    return $mysqli->query($query)->fetch_array();
   }
 
   public static function getCommaSeparatedList($array){
@@ -39,8 +39,8 @@ class Response
       return "(null)";
     $list = "(";
     for ($i = 0; $i < count($array) - 1; $i++)
-      $list .= $array[$i] . ", ";
-    return $list . $array[count($array)-1] . ")";
+      $list .= "'" . $array[$i] . "', ";
+    return $list . "'" . $array[count($array)-1] . "')";
   }
 
   public static function getRecentActivity($id) {

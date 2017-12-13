@@ -158,7 +158,7 @@ $("#filter-form").change(function(e) {
 		maxAge:max_age
 	}
 	$.ajax({
-		url:"http://localhost:8000/php/response.php"+$("#results-header").attr("qid"),
+		url:"http://localhost:8000/php/response.php/"+$("#results-header").attr("qid"),
 		method: "GET",
 		dataType:"json",
 		data: data

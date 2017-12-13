@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 		if($is_authorized) {
 			header("Content-Type: application/json");
 			print(json_encode(Response::getResponseData($path_components[1], $_GET['races'], $_GET['religions'], $_GET['countries'], $_GET['genders'], 
-														$_GET['min_age'], $_GET['max_age'])));
+														$_GET['minAge'], $_GET['maxAge'])));
 			exit();
 		} else {
 			header("HTTP/1.0 401 Unauthorized");
