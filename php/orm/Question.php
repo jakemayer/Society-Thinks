@@ -76,5 +76,22 @@ class Question
       }
       return $array;
   }
+
+  public static function getCreateQuestion($user_id, $question, $answers, $date) {
+    $mysqli = Question::connect();
+    $create_question = "INSERT INTO Final_Question (`id`, `asked_by`, `asked_time`, `question`)
+    VALUES (0,".$user_id.",'".$date."','".$question."')";
+    $result = $mysqli->query($create_question);
+    $qid = $mysqli->query("SELECT max(id) as id FROM Final_Question")->fetch_array()['id'];
+    if($result) {
+      $answers = explode("|",$answers);
+      for($i = 0; $i < count($answers);$i++) {
+        $mysqli->query("INSERT INTO Final_Answer (`id`, `question`, `answer`) VALUES (0,".$qid.", '".$answers[$i]."')");
+      }
+    } else {
+      return "error";
+    }
+    return "success";
+  }
 }
 ?>
