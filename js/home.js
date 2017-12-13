@@ -22,14 +22,14 @@ $( document ).ready(function() {
 					let point_color = "";
 					if(response[i].is_response == 1) {
 						text = "You responded to ";
-						dateObject = new Date(Date.parse(response[i]['responded_time']));
+						dateObject = new Date(Date.parse(response[i]['time']));
 						time = dateObject.toDateString();
 						icon = "playlist_add_check";
 						points = "+25"
 						point_color = "green"
 					} else {
 						text = "You asked ";
-						dateObject = new Date(Date.parse(response[i]['asked_time']));
+						dateObject = new Date(Date.parse(response[i]['time']));
 						time = dateObject.toDateString();
 						icon = "question_answer";
 						points = "-50";

@@ -14,16 +14,16 @@ class Question
   
   public static function getRecentActivity($id) {
     $mysqli = Question::connect();
-    $query = "SELECT q.id, q.question,q.asked_time, r.responded_time, 1 as is_response
+    $query = "SELECT q.id, q.question, r.responded_time as time, 1 as is_response
               from Final_Response r
               join Final_Question q ON
               q.id = r.question
               where r.responded_by = ".$id."
               UNION
-              SELECT q.id, q.question, q.asked_time, null as responded_time, 0 as is_response
+              SELECT q.id, q.question, q.asked_time as time, 0 as is_response
               from Final_Question q
               where q.asked_by = ".$id."
-              ORDER BY `asked_time`  desc limit 10";
+              ORDER BY `time` desc limit 4";
     $result = $mysqli->query($query);
 
     $array = array();
