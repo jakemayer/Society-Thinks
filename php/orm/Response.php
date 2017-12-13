@@ -11,12 +11,14 @@ class Response
 		      "marclanedb");
   }
 
-  public static function getResponseData($question_id, $races, $religions, $countries, $genders, $start_date, $end_date){
+  public static function getResponseData($question_id, $races, $religions, $countries, $genders, $min_age, $max_age){
     $mysqli = Response::connect();
     $race_list = Response::getCommaSeparatedList($races);
     $religion_list = Response::getCommaSeparatedList($religions);
     $country_list = Response::getCommaSeparatedList($countries);
     $gender_list = Response::getCommaSeparatedList($genders);
+    $start_date  = date("Y-m-d", mktime(0, 0, 0, date("m"),   date("d"),   date("Y")-$max_age-1));
+    $end_date = date("Y-m-d", mktime(0, 0, 0, date("m"),   date("d"),   date("Y")-$min_age));
     $query = "SELECT A.answer, COUNT(*)
               FROM Final_Response R, Final_User U, Final_Answer A
               WHERE R.question = " . $question_id . "
@@ -26,7 +28,7 @@ class Response
               AND U.religion IN " . $religion_list . "
               AND U.country IN " . $country_list . "
               AND U.gender IN " . $gender_list . "
-              AND U.birthday >= " . $start_date . "
+              AND U.birthday > " . $start_date . "
               AND U.birthday <= " . $end_date . "
               GROUP BY A.id";
     return $mysqli->query($query);
