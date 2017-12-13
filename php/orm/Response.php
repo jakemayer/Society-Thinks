@@ -17,8 +17,6 @@ class Response
     $religion_list = Response::getCommaSeparatedList($religions);
     $country_list = Response::getCommaSeparatedList($countries);
     $gender_list = Response::getCommaSeparatedList($genders);
-    $start_date  = date("Y-m-d", mktime(0, 0, 0, date("m"),   date("d"),   date("Y")-$max_age-1));
-    $end_date = date("Y-m-d", mktime(0, 0, 0, date("m"),   date("d"),   date("Y")-$min_age));
     $query = "SELECT A.answer, COUNT(*) as count
               FROM Final_Response R, Final_User U, Final_Answer A
               WHERE R.question = " . $question_id . "
@@ -27,12 +25,15 @@ class Response
               AND U.race IN " . $race_list . "
               AND U.religion IN " . $religion_list . "
               AND U.country IN " . $country_list . "
-              AND U.gender IN " . $gender_list;
-    if ($min_age != null)
-      $query .= "AND U.birthday > '" . $start_date . "'";
-    if ($max_age != null)
-      $query .= "AND U.birthday <= '" . $end_date . "'";
-    
+              AND U.gender IN " . $gender_list . " ";
+    if ($max_age != null){
+      $start_date  = date("Y-m-d", mktime(0, 0, 0, date("m"),   date("d"),   date("Y")-$max_age-1));
+      $query .= "AND U.birthday > '" . $start_date . "' ";
+    }
+    if ($min_age != null){
+      $end_date = date("Y-m-d", mktime(0, 0, 0, date("m"),   date("d"),   date("Y")-$min_age));
+      $query .= "AND U.birthday <= '" . $end_date . "' ";
+    }
     $query .= "GROUP BY A.id";
     $result = $mysqli->query($query);
     $array = array();
