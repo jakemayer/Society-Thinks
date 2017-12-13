@@ -70,7 +70,7 @@ $( document ).ready(function() {
 			$("#questions-overlay").css("display","none");
 		}).fail(function(error) {
 			alert("Fail");
-			console.log(error); //log them out or something
+			console.log(error);
 		});
 	});
 
