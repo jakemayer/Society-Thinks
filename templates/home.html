@@ -1,5 +1,42 @@
 <div class="wrapper">
   <div id="user_info">
+    <aside class="mdc-dialog" id="ask-dialog">
+          <div class="mdc-dialog__surface">
+            <header class="mdc-dialog__header">
+              <h2 id="ask-header" class="mdc-dialog__header__title">
+                Ask a Question
+              </h2>
+            </header>
+            <form id="ask-form">
+            <section id="ask-description" class="mdc-dialog__body">
+              <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                <input type="text" class="mdc-text-field__input" id="question">
+                <label for="question" class="mdc-text-field__label">Question</label>
+              </div>
+              <br>
+              <div id="ask-answers">
+                <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                  <input type="text" class="mdc-text-field__input" id="answer1">
+                  <label for="answer1" class="mdc-text-field__label">Answer Choice 1</label>
+                </div>
+                <br>
+                <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                  <input type="text" class="mdc-text-field__input" id="answer2">
+                  <label for="answer2" class="mdc-text-field__label">Answer Choice 2</label>
+                </div>
+              </div>
+              <br>
+              <button type="button" id="add-answer" class="mdc-button mdc-button--raised mdc-ripple-upgraded">+1</button>
+              <button type="button" id="subtract-answer" style="background-color: #A00000;"  class="mdc-button mdc-button--raised mdc-ripple-upgraded">-1</button>
+            </section>
+            <footer class="mdc-dialog__footer">
+              <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--cancel">Cancel</button>
+              <button type="submit" id="submit-question" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept mdc-dialog__action">Ask Society!</button>
+            </footer>
+          </form>
+
+          </div>
+      </aside>
     <div class="mdc-layout-grid">
       <div class="mdc-layout-grid__inner">
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8">
@@ -9,8 +46,8 @@
                 <p id="question_of_day_text"></p>
               </div>
             </div>
-            <div id="points_wrapper">
-              <div class="points-display">
+            <div id="points_wrapper" style="margin-bottom: 5%;">
+              <div class="points-display" style="margin-top: -8%;">
                 <div class="points-header">
                   You Have
                 </div>
@@ -21,6 +58,7 @@
                   Points
                 </div>
               </div>
+              <button id="ask-button" class="mdc-button mdc-button--raised mdc-ripple-upgraded" style="margin-left: 38%; margin-top: 4%;">Ask a Question</button>
             </div>
             <div id="stats_display">
 

@@ -60,6 +60,20 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 	} 
 
 } else if ($_SERVER['REQUEST_METHOD'] == "POST") {
+	if(count($path_components) >=2 && $path_components[1] != "") {
+		if($path_components[1] == "create") {
+			$is_authorized = Token::authorizeRequest($_COOKIE['uid'],$_COOKIE['uuid']);
+			if($is_authorized) {
+				header("Content-Type: application/json");
+				print(json_encode(Question::getCreateQuestion($_COOKIE['uid'],$_GET['question'],$_GET['answers'],$_GET['date'])));
+				exit();
+			} else {
+				header("HTTP/1.0 401 Unauthorized");
+				print("oh no!");
+				exit();
+			}
+		}
+	}
 
 }
 header("HTTP/1.0 400 Bad Request");
