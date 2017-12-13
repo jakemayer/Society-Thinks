@@ -23,11 +23,14 @@ $( document ).ready(function() {
 					$("#question-title").text(response[0]['question']);
 					$("#answer-footer").html("");
 					for(let i = 0; i < response.length; i++) {
-						$("#answer-footer").prepend(`<button style="margin-left:1%;" type="button" 
+						$("#answer-footer").prepend(`<button id="B`+i+`" style="margin-left:1%;" type="button" 
 							class="mdc-button 
 							mdc-button mdc-button--raised mdc-ripple-upgraded
 							">`+response[i]['answer']+`
-							</button>`)
+							</button>`);
+						$("#B"+i).click(function(){
+							handleResponse(response[i][0], response[i][3])
+						});
 					}
 				}).fail(function(error){
 					console.log(error);
@@ -40,6 +43,21 @@ $( document ).ready(function() {
 		alert("Fail");
 		console.log(error); //log them out or something
 	});
+
+	function handleResponse(answer_id, question_id){
+		$("#overlay").css("display","block");
+		$.ajax({
+	  		url: "http://localhost:8000/php/response.php/"+question_id,
+	  		method: "POST",
+	  		dataType: "json",
+	  		data: {user_id: $.cookie('uid'), answer_id: answer_id}
+		}).done(function(response) {
+			$("#overlay").css("display","none");
+			answer_dialog.hide();
+		}).fail(function(error){
+			console.log(error);
+		});
+	}
 
 	$("#my-tab").click(function() {
 		$("#questions-tab").removeClass("mdc-tab--active");
