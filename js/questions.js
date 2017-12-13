@@ -4,6 +4,7 @@ $( document ).ready(function() {
 	const MDCDialogFoundation = mdc.dialog.MDCDialogFoundation;
 	const util = mdc.dialog.util;
 	var answer_dialog = new mdc.dialog.MDCDialog(document.querySelector('#answer-dialog'));
+	var results_dialog = new mdc.dialog.MDCDialog(document.querySelector("#results-dialog"));
 
 
 	$("#overlay").css("display","block");
@@ -36,6 +37,11 @@ $( document ).ready(function() {
 					console.log(error);
 				});
 			  	answer_dialog.show();
+			});
+			$("#Q"+response[i][0]+"-results").click(function(){
+				$("#results-header").text(response[i]['question']);
+				$("#results-header").attr("qid",response[i][0]);
+				results_dialog.show();
 			});
 		}
 		$("#overlay").css("display","none");
@@ -112,6 +118,55 @@ $( document ).ready(function() {
 		});
 	});
 
+});
+
+$("#filter-form").change(function(e) {
+	let genderFilter = [];
+	let raceFilter = [];
+	let religionFilter = [];
+	let countryFilter = [];
+
+	$("#gender-filter input").each(function(i, el) {
+		if(el.checked == true) {
+			genderFilter.push(el.id);
+		}
+	});
+	$("#race-filter input").each(function(i, el) {
+		if(el.checked == true) {
+			raceFilter.push(el.id);
+		}
+	});
+	$("#country-filter input").each(function(i, el) {
+		if(el.checked == true) {
+			countryFilter.push(el.id);
+		}
+	});
+	$("#religion-filter input").each(function(i, el) {
+		if(el.checked == true) {
+			religionFilter.push(el.id);
+		}
+	});
+	let min_age = $("#age_min").val();
+	let max_age = $("#age_max").val();
+
+	let data = {
+		genders:genderFilter,
+		races:raceFilter,
+		religions:religionFilter,
+		countries:countryFilter,
+		minAge: min_age,
+		maxAge:max_age
+	}
+	$.ajax({
+		url:"http://localhost:8000/php/response.php"+$("#results-header").attr("qid"),
+		method: "GET",
+		dataType:"json",
+		data: data
+	}).done(function(response) {
+		console.log(response);
+	}).fail(function(error) {
+		console.log(error);
+	});
 });
 
 function createQuestionCard(id, question, asker, picture, country, datetime, is_yours){

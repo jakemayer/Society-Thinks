@@ -5,6 +5,327 @@
 
 	    <span class="mdc-tab-bar__indicator" style="transform: translateX(0px) scale(0.5, 1); visibility: visible;"></span>
 	 </nav>
+	  <aside class="mdc-dialog" id="results-dialog">
+          <div class="mdc-dialog__surface">
+            <header class="mdc-dialog__header">
+              <h2 id="results-header" class="mdc-dialog__header__title">
+                Results
+              </h2>
+            </header>
+            <form id="filter-form">
+            <section id="filter-results" class="mdc-dialog__body">
+            <div id="gender-filter" style="float:left">
+            	<h2>Gender</h2>
+				<div class="mdc-form-field">
+	              <div class="mdc-checkbox">
+	                <input id="male" class="mdc-checkbox__native-control" type="checkbox">
+	                <div class="mdc-checkbox__background">
+	                  <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+	                    <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+	                  </svg>
+	                  <div class="mdc-checkbox__mixedmark"></div>
+	                </div>
+	              </div>
+	              <label for="basic-custom-checkbox-stroke-and-fill">Male</label>
+	            </div>
+	            <br>
+	            <div class="mdc-form-field">
+	              <div class="mdc-checkbox">
+	                <input id="female" class="mdc-checkbox__native-control" type="checkbox">
+	                <div class="mdc-checkbox__background">
+	                  <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+	                    <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+	                  </svg>
+	                  <div class="mdc-checkbox__mixedmark"></div>
+	                </div>
+	              </div>
+	              <label for="basic-custom-checkbox-stroke-and-fill">Female</label>
+	            </div>
+	            <br>
+	            <div class="mdc-form-field">
+	              <div class="mdc-checkbox">
+	                <input id="gender-other" class="mdc-checkbox__native-control" type="checkbox">
+	                <div class="mdc-checkbox__background">
+	                  <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+	                    <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+	                  </svg>
+	                  <div class="mdc-checkbox__mixedmark"></div>
+	                </div>
+	              </div>
+	              <label for="basic-custom-checkbox-stroke-and-fill">Other</label>
+	            </div>
+	        </div>
+	        <div id="race-filter" style="float:left">
+            	<h2>Race</h2>
+				<div class="mdc-form-field">
+	              <div class="mdc-checkbox">
+	                <input id="white" class="mdc-checkbox__native-control" type="checkbox">
+	                <div class="mdc-checkbox__background">
+	                  <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+	                    <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+	                  </svg>
+	                  <div class="mdc-checkbox__mixedmark"></div>
+	                </div>
+	              </div>
+	              <label for="basic-custom-checkbox-stroke-and-fill">White</label>
+	            </div>
+	            <br>
+	            <div class="mdc-form-field">
+	              <div class="mdc-checkbox">
+	                <input id="black" class="mdc-checkbox__native-control" type="checkbox">
+	                <div class="mdc-checkbox__background">
+	                  <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+	                    <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+	                  </svg>
+	                  <div class="mdc-checkbox__mixedmark"></div>
+	                </div>
+	              </div>
+	              <label for="basic-custom-checkbox-stroke-and-fill">African American</label>
+	            </div>
+	            <br>
+	            <div class="mdc-form-field">
+	              <div class="mdc-checkbox">
+	                <input id="indian" class="mdc-checkbox__native-control" type="checkbox">
+	                <div class="mdc-checkbox__background">
+	                  <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+	                    <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+	                  </svg>
+	                  <div class="mdc-checkbox__mixedmark"></div>
+	                </div>
+	              </div>
+	              <label for="basic-custom-checkbox-stroke-and-fill">American Indian</label>
+	            </div>
+	            <br>
+	            <div class="mdc-form-field">
+	              <div class="mdc-checkbox">
+	                <input id="hispanic" class="mdc-checkbox__native-control" type="checkbox">
+	                <div class="mdc-checkbox__background">
+	                  <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+	                    <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+	                  </svg>
+	                  <div class="mdc-checkbox__mixedmark"></div>
+	                </div>
+	              </div>
+	              <label for="basic-custom-checkbox-stroke-and-fill">Hispanic</label>
+	            </div>
+	            <br>
+	            <div class="mdc-form-field">
+	              <div class="mdc-checkbox">
+	                <input id="pacific" class="mdc-checkbox__native-control" type="checkbox">
+	                <div class="mdc-checkbox__background">
+	                  <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+	                    <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+	                  </svg>
+	                  <div class="mdc-checkbox__mixedmark"></div>
+	                </div>
+	              </div>
+	              <label for="basic-custom-checkbox-stroke-and-fill">Pacific Islander</label>
+	            </div>
+	            <br>
+	            <div class="mdc-form-field">
+	              <div class="mdc-checkbox">
+	                <input id="race-other" class="mdc-checkbox__native-control" type="checkbox">
+	                <div class="mdc-checkbox__background">
+	                  <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+	                    <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+	                  </svg>
+	                  <div class="mdc-checkbox__mixedmark"></div>
+	                </div>
+	              </div>
+	              <label for="basic-custom-checkbox-stroke-and-fill">Other</label>
+	            </div>	 	            	            
+	        </div>
+	        <div id="religion-filter" style="float:left">
+            	<h2>Religion</h2>
+				<div class="mdc-form-field">
+	              <div class="mdc-checkbox">
+	                <input id="christian" class="mdc-checkbox__native-control" type="checkbox">
+	                <div class="mdc-checkbox__background">
+	                  <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+	                    <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+	                  </svg>
+	                  <div class="mdc-checkbox__mixedmark"></div>
+	                </div>
+	              </div>
+	              <label for="basic-custom-checkbox-stroke-and-fill">Christianity</label>
+	            </div>
+	            <br>
+	            <div class="mdc-form-field">
+	              <div class="mdc-checkbox">
+	                <input id="muslim" class="mdc-checkbox__native-control" type="checkbox">
+	                <div class="mdc-checkbox__background">
+	                  <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+	                    <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+	                  </svg>
+	                  <div class="mdc-checkbox__mixedmark"></div>
+	                </div>
+	              </div>
+	              <label for="basic-custom-checkbox-stroke-and-fill">Islam</label>
+	            </div>
+	            <br>
+	            <div class="mdc-form-field">
+	              <div class="mdc-checkbox">
+	                <input id="jewish" class="mdc-checkbox__native-control" type="checkbox">
+	                <div class="mdc-checkbox__background">
+	                  <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+	                    <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+	                  </svg>
+	                  <div class="mdc-checkbox__mixedmark"></div>
+	                </div>
+	              </div>
+	              <label for="basic-custom-checkbox-stroke-and-fill">Judiasm</label>
+	            </div>
+	            <br>
+	            <div class="mdc-form-field">
+	              <div class="mdc-checkbox">
+	                <input id="nonreligious" class="mdc-checkbox__native-control" type="checkbox">
+	                <div class="mdc-checkbox__background">
+	                  <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+	                    <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+	                  </svg>
+	                  <div class="mdc-checkbox__mixedmark"></div>
+	                </div>
+	              </div>
+	              <label for="basic-custom-checkbox-stroke-and-fill">Nonreligious</label>
+	            </div>
+	            <br>
+	            <div class="mdc-form-field">
+	              <div class="mdc-checkbox">
+	                <input id="buddhist" class="mdc-checkbox__native-control" type="checkbox">
+	                <div class="mdc-checkbox__background">
+	                  <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+	                    <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+	                  </svg>
+	                  <div class="mdc-checkbox__mixedmark"></div>
+	                </div>
+	              </div>
+	              <label for="basic-custom-checkbox-stroke-and-fill">Buddhism</label>
+	            </div>
+	            <br>
+	            <div class="mdc-form-field">
+	              <div class="mdc-checkbox">
+	                <input id="hindu" class="mdc-checkbox__native-control" type="checkbox">
+	                <div class="mdc-checkbox__background">
+	                  <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+	                    <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+	                  </svg>
+	                  <div class="mdc-checkbox__mixedmark"></div>
+	                </div>
+	              </div>
+	              <label for="basic-custom-checkbox-stroke-and-fill">Hinduism</label>
+	            </div>
+	            <br>
+	            <div class="mdc-form-field">
+	              <div class="mdc-checkbox">
+	                <input id="religion-other" class="mdc-checkbox__native-control" type="checkbox">
+	                <div class="mdc-checkbox__background">
+	                  <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+	                    <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+	                  </svg>
+	                  <div class="mdc-checkbox__mixedmark"></div>
+	                </div>
+	              </div>
+	              <label for="basic-custom-checkbox-stroke-and-fill">Other</label>
+	            </div>
+	        </div>
+	        <div id="country-filter" style="float:left">
+            	<h2>Country</h2>
+				<div class="mdc-form-field">
+	              <div class="mdc-checkbox">
+	                <input id="us" class="mdc-checkbox__native-control" type="checkbox">
+	                <div class="mdc-checkbox__background">
+	                  <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+	                    <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+	                  </svg>
+	                  <div class="mdc-checkbox__mixedmark"></div>
+	                </div>
+	              </div>
+	              <label for="basic-custom-checkbox-stroke-and-fill">United States</label>
+	            </div>
+	            <br>
+	            <div class="mdc-form-field">
+	              <div class="mdc-checkbox">
+	                <input id="uk" class="mdc-checkbox__native-control" type="checkbox">
+	                <div class="mdc-checkbox__background">
+	                  <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+	                    <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+	                  </svg>
+	                  <div class="mdc-checkbox__mixedmark"></div>
+	                </div>
+	              </div>
+	              <label for="basic-custom-checkbox-stroke-and-fill">United Kingdom</label>
+	            </div>
+	            <br>
+	            <div class="mdc-form-field">
+	              <div class="mdc-checkbox">
+	                <input id="fr" class="mdc-checkbox__native-control" type="checkbox">
+	                <div class="mdc-checkbox__background">
+	                  <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+	                    <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+	                  </svg>
+	                  <div class="mdc-checkbox__mixedmark"></div>
+	                </div>
+	              </div>
+	              <label for="basic-custom-checkbox-stroke-and-fill">France</label>
+	            </div>
+	            <br>
+	            <div class="mdc-form-field">
+	              <div class="mdc-checkbox">
+	                <input id="ca" class="mdc-checkbox__native-control" type="checkbox">
+	                <div class="mdc-checkbox__background">
+	                  <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+	                    <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+	                  </svg>
+	                  <div class="mdc-checkbox__mixedmark"></div>
+	                </div>
+	              </div>
+	              <label for="basic-custom-checkbox-stroke-and-fill">Canada</label>
+	            </div>
+	            <br>
+	            <div class="mdc-form-field">
+	              <div class="mdc-checkbox">
+	                <input id="mx" class="mdc-checkbox__native-control" type="checkbox">
+	                <div class="mdc-checkbox__background">
+	                  <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+	                    <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+	                  </svg>
+	                  <div class="mdc-checkbox__mixedmark"></div>
+	                </div>
+	              </div>
+	              <label for="basic-custom-checkbox-stroke-and-fill">Mexico</label>
+	            </div>
+	            <br>
+	            <div class="mdc-form-field">
+	              <div class="mdc-checkbox">
+	                <input id="ru" class="mdc-checkbox__native-control" type="checkbox">
+	                <div class="mdc-checkbox__background">
+	                  <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+	                    <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+	                  </svg>
+	                  <div class="mdc-checkbox__mixedmark"></div>
+	                </div>
+	              </div>
+	              <label for="basic-custom-checkbox-stroke-and-fill">Russia</label>
+	            </div>	            	            	            
+	        </div>
+	        <div id="birthday-filter" style="float:left; margin-left: 1%;">
+	          <div class="mdc-text-field" data-mdc-auto-init="MDCTextField" style="width: 40%;">
+                <input type="text" class="mdc-text-field__input" id="age_min">
+                <label for="age_min" class="mdc-text-field__label">Min Age</label>
+              </div>
+              <br>
+              <div class="mdc-text-field" data-mdc-auto-init="MDCTextField" style="width: 40%;">
+                <input type="text" class="mdc-text-field__input" id="age_max">
+                <label for="age_max" class="mdc-text-field__label">Max Age</label>
+              </div>
+	        </div>
+            </section>
+            </form>
+            <footer class="mdc-dialog__footer">
+              <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--cancel">Cancel</button>
+            </footer>
+          </div>
+      </aside>
 	  <div class="filter-bar">
 	 	<div><input type="text" id="search-bar" placeholder="Search for Questions"><i class="material-icons" style="position:absolute;margin-left: -2.4%;margin-top: .7%;">search</i></div>
 	 	
