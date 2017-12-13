@@ -31,7 +31,15 @@ class Response
               AND U.birthday > '" . $start_date . "'
               AND U.birthday <= '" . $end_date . "'
               GROUP BY A.id";
-    return $mysqli->query($query)->fetch_array();
+              
+    $result = $mysqli->query($query);
+    $array = array();
+    if($result) {
+      while($next_row = $result->fetch_array()) {
+        $array[] = $next_row;
+      }
+    }
+    return $array;
   }
 
   public static function getCommaSeparatedList($array){
