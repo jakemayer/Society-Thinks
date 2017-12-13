@@ -8,6 +8,18 @@
 	background-color: white;
 }
 
+#results-dialog h2 {
+	font-size: 10px;
+}
+
+#filter-results {
+	margin-top: -1%;
+}
+
+.mdc-form-field {
+	transform: scale(.7);
+}
+
 .country-banner {
 	position: absolute;
 	width: 50px;
