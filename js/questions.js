@@ -127,8 +127,8 @@ $( document ).ready(function() {
 
 	$("#exit-results").click(function(){
 		$(".mdc-checkbox__native-control").prop("checked", true);
-		$("#age_min").text("");
-		$("#age_max").text("");
+		$("#age_min").val("");
+		$("#age_max").val("");
 	});
 });
 
