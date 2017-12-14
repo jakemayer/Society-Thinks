@@ -200,7 +200,6 @@ $( document ).ready(function() {
 			console.log(error);
 		});
 	});
-
 });
 
 $("#filter-form").change(function(e) {
@@ -284,11 +283,30 @@ $("#filter-form").change(function(e) {
 	}).fail(function(error) {
 		console.log(error);
 	});
-
-	$(window).scroll(function(){alert("WINDOW SCROLLED");});
 });
 
+$( window ).scroll(function(){scroll_handler();});
+
+var question_cards = [];
 var viewed_cards = [];
+
+function scroll_handler(){
+	question_cards.forEach(function(card){
+		if (!viewed_cards.includes(card) && inViewport(document.getElementById(card))){
+			viewed_cards.push(card);
+			var question_id = parseInt(card.substring(1));
+			$.ajax({
+				url:"http://localhost:8000/php/questions.php/viewed",
+				method: "GET",
+				dataType:"json",
+				data: {question: question_id, viewed_by: $.cookie('uid')}
+			}).done(function(response) {
+			}).fail(function(error){
+				console.log(error);
+			})
+		}
+	});
+};
 
 function createQuestionCard(id, question, asker, picture, country, datetime, is_yours){
 
@@ -309,13 +327,8 @@ function createQuestionCard(id, question, asker, picture, country, datetime, is_
   </div>`;
 
   $("#question-content").append(html_string);
-  $("#Q"+id).scroll(function(){
-		alert("SCROLL");
-		if (!viewed_cards.includes(card) && inViewport(document.getElementById("Q"+id))){
-			alert(card + " viewed");
-			viewed_cards.push(card);
-		}
-	});
+  question_cards.push("Q"+id);
+  scroll_handler();
 }
 
 function inViewport(el){
