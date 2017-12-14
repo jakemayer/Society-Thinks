@@ -82,9 +82,11 @@ $( document ).ready(function() {
 			  dataType: "json"
 			}).done(function(response) {
 				$("#overlay").css("display","none");
-				var resp_rate = parseFloat(response['response_rate']).toFixed(2)*100+"%";
-				if (resp_rate == NaN)
+				var resp_rate = parseFloat(response['response_rate']).toFixed(2)*100;
+				if (isNaN(resp_rate))
 					resp_rate = "N/A";
+				else
+					resp_rate += "%";
 				$("#stat_box1 > .inner-stat-circle").empty().append(resp_rate);
 				$("#stat_box2 > .inner-stat-circle").empty().append(response['asked_count']);
 				$("#stat_box3 > .inner-stat-circle").empty().append(response['responded_count']);
