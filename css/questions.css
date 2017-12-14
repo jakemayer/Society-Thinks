@@ -34,6 +34,9 @@ tr:nth-child(even) {
 #gender-filter .mdc-checkbox::before, .mdc-checkbox::after {
 	background-color: pink;
 }
+#gender-filter:focus {
+	background-color: none;
+}
 
 #religion-filter .mdc-checkbox__background {
 	background-color: blue;
