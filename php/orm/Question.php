@@ -38,8 +38,10 @@ class Question
   public static function createView($qid, $uid) {
     $mysqli = Question::connect();
     $check = "SELECT count(*) as count FROM Final_Views v where v.question = ".$qid." and v.viewed_by=".$uid;
+    $check2 = "SELECT asked_by FROM Final_Question WHERE id = ".$qid;
     $count = $mysqli->query($check)->fetch_array()[0];
-    if($count == 0) {
+    $asker = $mysqli->query($check2)->fetch_array()[0];
+    if($count == 0 && $asker != $uid) {
       $query = "INSERT INTO Final_Views VALUES (0,".$uid.",".$qid.")";
       return $mysqli->query($query);
     } else {
@@ -93,6 +95,7 @@ class Question
 
   public static function getCreateQuestion($user_id, $question, $answers, $date) {
     $mysqli = Question::connect();
+    $question = str_replace("'", "''", $question);
     $create_question = "INSERT INTO Final_Question (`id`, `asked_by`, `asked_time`, `question`)
     VALUES (0,".$user_id.",'".$date."','".$question."')";
     $result = $mysqli->query($create_question);
@@ -100,6 +103,7 @@ class Question
     if($result) {
       $answers = explode("|",$answers);
       for($i = 0; $i < count($answers);$i++) {
+        $answers[$i] = str_replace("'", "''", $answers[$i]);
         $mysqli->query("INSERT INTO Final_Answer (`id`, `question`, `answer`) VALUES (0,".$qid.", '".$answers[$i]."')");
       }
     } else {

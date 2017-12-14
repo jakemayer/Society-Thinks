@@ -82,7 +82,10 @@ $( document ).ready(function() {
 			  dataType: "json"
 			}).done(function(response) {
 				$("#overlay").css("display","none");
-				$("#stat_box1 > .inner-stat-circle").empty().append(parseFloat(response['response_rate']).toFixed(2)*100+"%");
+				var resp_rate = parseFloat(response['response_rate']).toFixed(2)*100+"%";
+				if (resp_rate == NaN)
+					resp_rate = "N/A";
+				$("#stat_box1 > .inner-stat-circle").empty().append(resp_rate);
 				$("#stat_box2 > .inner-stat-circle").empty().append(response['asked_count']);
 				$("#stat_box3 > .inner-stat-circle").empty().append(response['responded_count']);
 				$(".points-content").empty().append(response['points']);
