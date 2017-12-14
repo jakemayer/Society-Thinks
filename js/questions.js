@@ -124,6 +124,12 @@ $( document ).ready(function() {
 			console.log(error);
 		});
 	});
+
+	$("#exit-results").click(function(){
+		$(".mdc-checkbox__native-control").prop("checked", true);
+		$("#age_min").val("");
+		$("#age_max").val("");
+	});
 });
 
 $("#filter-form").change(function(e) {
