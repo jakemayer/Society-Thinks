@@ -49,7 +49,9 @@ class Question
 
   public static function filterQuestions($user_id,$string) {
      $mysqli = Question::connect();
-     $query = "Select *, CASE WHEN q.asked_by = ".$user_id." THEN 1 ELSE 0 END as is_yours from Final_Question q join Final_User u on u.id = asked_by where 1 = 1 ";
+     $query = "Select *, CASE WHEN q.asked_by = ".$user_id." THEN 1 ELSE 0 END as is_yours,
+              CASE WHEN ".$user_id." IN (Select r.responded_by from Final_Response r Where r.question = q.id) THEN 1 ELSE 0 END as already_responded
+              from Final_Question q join Final_User u on u.id = asked_by where 1 = 1 ";
      if($string != null) {
         $query = $query. "AND question LIKE '%".$string."%' ";
      }
