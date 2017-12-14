@@ -105,6 +105,11 @@ $( document ).ready(function() {
 				  $("#Q"+response[i][0]+"-answers").click(function(){
 				  	answer_dialog.show();
 				 });
+				$("#Q"+response[i][0]+"-results").click(function(){
+					$("#results-header").text(response[i]['question']);
+					$("#results-header").attr("qid",response[i][0]);
+					generateAndShowResults(response[i][0],results_dialog);
+				});
 			}
 			if($("#my-tab").attr("active")=="true"){
 				$(".question-card").each(function(i,card) {
