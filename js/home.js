@@ -232,6 +232,9 @@ function generateAndShowResults(question_id,results_dialog){
 									    	<td>`+((obj['count']/total_count)*100).toFixed(1)+"%"+`</td>
 										</tr>`);
 		});
+		if(data.length == 0) {
+			$("#canvas-container").append(`<h1 style="margin-top:-50%; margin-left:5%;">Data does not match these filters</h1>`)
+		}
 		var myChart = new Chart(ctx, {
 		    type: 'doughnut',
 		    data: {
