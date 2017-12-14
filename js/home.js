@@ -91,6 +91,7 @@ $( document ).ready(function() {
 			$("#submit-question").css("display","none");
 		} else {
 			$("#ask-header").text("Ask a Question");
+			$("#buy-points").hide();
 			$("#ask-description").css("display","block");
 			$("#submit-question").css("display","block");		
 		}
@@ -135,7 +136,7 @@ $( document ).ready(function() {
 			  method: "POST",
 			  dataType: "json"
 		}).done(function(response) {
-			console.log(response);
+			window.location.reload();
 		}).fail(function(err){
 			console.log(err);
 		});
