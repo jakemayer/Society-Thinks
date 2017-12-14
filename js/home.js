@@ -4,10 +4,24 @@ $( document ).ready(function() {
 	const MDCDialogFoundation = mdc.dialog.MDCDialogFoundation;
 	const util = mdc.dialog.util;
 	var ask_dialog = new mdc.dialog.MDCDialog(document.querySelector('#ask-dialog'));
+	var r_dialog = new mdc.dialog.MDCDialog(document.querySelector('#results-home-dialog'));
 
 	let num_points = 0;
 	let answers_count = 2;
 
+	$("#question_of_day_text").click(function(){
+		generateAndShowResults($(this).attr("qid"),r_dialog);
+		$("#results-header").text($(this).attr("qtext"));
+	});
+	$("#filter-form").change(function(e) {
+		var results_dialog = new mdc.dialog.MDCDialog(document.querySelector("#results-home-dialog"));
+		generateAndShowResults($("#question_of_day_text").attr("qid"),results_dialog);
+	});
+	$("#exit-results").click(function(){
+		$(".mdc-checkbox__native-control").prop("checked", true);
+		$("#age_min").val("");
+		$("#age_max").val("");
+	});
 	$("#overlay").css("display","block");
 			$.ajax({
 			  url: "http://localhost:8000/php/questions.php/recent-activity/"+$.cookie("uid"),
@@ -39,7 +53,7 @@ $( document ).ready(function() {
 					<div class="mdc-card" style="margin-top:4%;">
 			            <div class="mdc-card__horizontal-block">
 			              <section class="mdc-card__primary" style="font-size:10px">
-			                <h2 class="mdc-card__subtitle" style="font-size:10px;">`+text+`<a href="app.html">`+response[i].question+`</a></h2>
+			                <h2 class="mdc-card__subtitle" style="font-size:10px;">`+text+`<span qid=`+response[i].id+` qtext="`+response[i].question+`" class="show-results-dialog">`+response[i].question+`</span></h2>
 			          		<i class="material-icons" style="font-size:12px;">access_time</i>`+time+`
 			              </section>
 			              <section>
@@ -51,6 +65,11 @@ $( document ).ready(function() {
 
 						`)
 				}
+				$(".show-results-dialog").click(function(){
+					generateAndShowResults($(this).attr("qid"),r_dialog);
+					$("#results-header").text($(this).attr("qtext"));
+				});
+
 				$("#overlay").css("display","none");
 			}).fail(function(error) {
 				console.log(error); //log them out or something
@@ -80,6 +99,9 @@ $( document ).ready(function() {
 			}).done(function(response) {
 				$("#overlay").css("display","none");
 				$("#question_of_day_text").empty().append(response['question']);
+				$("#question_of_day_text").attr("qid",response['id']);
+				$("#question_of_day_text").attr("qtext",response['question']);
+
 			}).fail(function(error) {
 				console.log(error);
 			});
@@ -142,3 +164,102 @@ $( document ).ready(function() {
 		});
 	});
 });
+
+function generateAndShowResults(question_id,results_dialog){
+	$(".content-row").remove()
+	$("#canvas-container").html("");
+	let genderFilter = [];
+	let raceFilter = [];
+	let religionFilter = [];
+	let countryFilter = [];
+
+	$("#canvas-container").append("<canvas id='chart' width='100' height='100' responsive></canvas>");
+
+	$("#gender-filter input").each(function(i, el) {
+		if(el.checked == true) {
+			genderFilter.push(el.id);
+		}
+	});
+	$("#race-filter input").each(function(i, el) {
+		if(el.checked == true) {
+			raceFilter.push(el.id);
+		}
+	});
+	$("#country-filter input").each(function(i, el) {
+		if(el.checked == true) {
+			countryFilter.push(el.id);
+		}
+	});
+	$("#religion-filter input").each(function(i, el) {
+		if(el.checked == true) {
+			religionFilter.push(el.id);
+		}
+	});
+	let min_age = $("#age_min").val();
+	let max_age = $("#age_max").val();
+
+	let data = {
+		genders:genderFilter,
+		races:raceFilter,
+		religions:religionFilter,
+		countries:countryFilter,
+		minAge: min_age,
+		maxAge:max_age
+	}
+	$.ajax({
+		url:"http://localhost:8000/php/response.php/"+question_id,
+		method: "GET",
+		dataType:"json",
+		data: data
+	}).done(function(response) {
+		ctx = $("#chart");
+		let labels = [];
+		let data = [];
+		let total_count = 0
+		response.forEach(function(obj){
+			total_count = total_count+Number(obj['count']);
+		});
+
+		response.forEach(function(obj) {
+			labels.push(obj['answer']);
+			data.push(obj['count']);
+			$("#results-table").append(`<tr class="content-row">
+									    	<td>`+obj['answer']+`</td>
+									    	<td>`+obj['count']+`</td>
+									    	<td>`+((obj['count']/total_count)*100).toFixed(1)+"%"+`</td>
+										</tr>`);
+		});
+		var myChart = new Chart(ctx, {
+		    type: 'doughnut',
+		    data: {
+		        labels: labels,
+		        datasets: [{
+		            data: data,
+		            backgroundColor: [
+		                'rgba(255, 99, 132, 0.2)',
+		                'rgba(54, 162, 235, 0.2)',
+		                'rgba(255, 206, 86, 0.2)',
+		                'rgba(75, 192, 192, 0.2)',
+		                'rgba(153, 102, 255, 0.2)',
+		                'rgba(255, 159, 64, 0.2)'
+		            ],
+		            borderColor: [
+		                'rgba(255,99,132,1)',
+		                'rgba(54, 162, 235, 1)',
+		                'rgba(255, 206, 86, 1)',
+		                'rgba(75, 192, 192, 1)',
+		                'rgba(153, 102, 255, 1)',
+		                'rgba(255, 159, 64, 1)'
+		            ],
+		            borderWidth: 1
+		        }]
+		    },
+		});
+		
+
+
+	}).fail(function(error) {
+		console.log(error);
+	});
+	results_dialog.show();
+}

@@ -1,4 +1,8 @@
-
+.show-results-dialog {
+  text-decoration: underline;
+  cursor: pointer;
+  color:blue;
+}
 
 .inner-stat-circle {
   width: 100px;
