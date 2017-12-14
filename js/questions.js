@@ -189,6 +189,7 @@ function inViewport(el){
 }
 
 function generateAndShowResults(question_id,results_dialog){
+	$(".content-row").remove()
 	$("#canvas-container").html("");
 	let genderFilter = [];
 	let raceFilter = [];
@@ -237,9 +238,19 @@ function generateAndShowResults(question_id,results_dialog){
 		ctx = $("#chart");
 		let labels = [];
 		let data = [];
+		let total_count = 0
+		response.forEach(function(obj){
+			total_count = total_count+Number(obj['count']);
+		});
+
 		response.forEach(function(obj) {
 			labels.push(obj['answer']);
 			data.push(obj['count']);
+			$("#results-table").append(`<tr class="content-row">
+									    	<td>`+obj['answer']+`</td>
+									    	<td>`+obj['count']+`</td>
+									    	<td>`+((obj['count']/total_count)*100).toFixed(1)+"%"+`</td>
+										</tr>`);
 		});
 		var myChart = new Chart(ctx, {
 		    type: 'doughnut',
