@@ -189,10 +189,13 @@ function inViewport(el){
 }
 
 function generateAndShowResults(question_id,results_dialog){
+	$("#canvas-container").html("");
 	let genderFilter = [];
 	let raceFilter = [];
 	let religionFilter = [];
 	let countryFilter = [];
+
+	$("#canvas-container").append("<canvas id='chart' width='100' height='100' responsive></canvas>");
 
 	$("#gender-filter input").each(function(i, el) {
 		if(el.checked == true) {
