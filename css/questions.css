@@ -26,32 +26,10 @@ tr:nth-child(even) {
 	z-index: 1;
 	background-color: white;
 }
-
-#gender-filter .mdc-checkbox__background {
-	background-color: #B00000;
-	border-color: #B00000;
-}
-#gender-filter .mdc-checkbox::before, .mdc-checkbox::after {
-	background-color: pink;
-}
-#gender-filter:focus {
-	background-color: none;
+.mdc-checkbox .mdc-checkbox__background::before {
+    background:none;
 }
 
-#religion-filter .mdc-checkbox__background {
-	background-color: blue;
-	border-color: blue;
-}
-#religion-filter .mdc-checkbox::before, .mdc-checkbox::after {
-	background-color: lightblue;
-}
-#race-filter .mdc-checkbox__background {
-	background-color: green;
-	border-color: green;
-}
-#race-filter .mdc-checkbox::before, .mdc-checkbox::after {
-	background-color: lightgreen;
-}
 #results-dialog h2 {
 	font-size: 10px;
 	text-align: center;
