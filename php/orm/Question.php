@@ -35,6 +35,18 @@ class Question
     return $array;
   }
 
+  public static function createView($qid, $uid) {
+    $mysqli = Question::connect();
+    $check = "SELECT count(*) as count FROM Final_Views v where v.question = ".$qid." and v.viewed_by=".$uid;
+    $count = $mysqli->query($check)->fetch_array();
+    if($count == 0) {
+      $query = "INSERT INTO Final_Views VALUES (0,".$qid.",".$uid.")";
+      return $mysqli->query($query);
+    } else {
+      return "already exists";
+    }
+  }
+
   public static function filterQuestions($user_id,$string) {
      $mysqli = Question::connect();
      $query = "Select *, CASE WHEN q.asked_by = ".$user_id." THEN 1 ELSE 0 END as is_yours from Final_Question q join Final_User u on u.id = asked_by where 1 = 1 ";

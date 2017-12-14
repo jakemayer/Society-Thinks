@@ -56,6 +56,17 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 				print("oh no!");
 				exit();
 			}
+		} else if($path_components[1] == "viewed") {
+			$is_authorized = Token::authorizeRequest($_COOKIE['uid'],$_COOKIE['uuid']);
+			if($is_authorized) {
+				header("Content-Type: application/json");
+				print(json_encode(Question::createView($_GET['question'],$_GET['viewed_by'])));
+				exit();
+			} else {
+				header("HTTP/1.0 401 Unauthorized");
+				print("oh no!");
+				exit();
+			}		
 		}
 	} 
 
