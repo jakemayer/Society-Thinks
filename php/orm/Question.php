@@ -38,9 +38,9 @@ class Question
   public static function createView($qid, $uid) {
     $mysqli = Question::connect();
     $check = "SELECT count(*) as count FROM Final_Views v where v.question = ".$qid." and v.viewed_by=".$uid;
-    $count = $mysqli->query($check)->fetch_array();
+    $count = $mysqli->query($check)->fetch_array()[0];
     if($count == 0) {
-      $query = "INSERT INTO Final_Views VALUES (0,".$qid.",".$uid.")";
+      $query = "INSERT INTO Final_Views VALUES (0,".$uid.",".$qid.")";
       return $mysqli->query($query);
     } else {
       return "already exists";
