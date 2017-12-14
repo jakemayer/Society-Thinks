@@ -86,6 +86,7 @@ $( document ).ready(function() {
 				if (isNaN(resp_rate))
 					resp_rate = "N/A";
 				else
+					resp_rate = resp_rate.toFixed();
 					resp_rate += "%";
 				$("#stat_box1 > .inner-stat-circle").empty().append(resp_rate);
 				$("#stat_box2 > .inner-stat-circle").empty().append(response['asked_count']);
