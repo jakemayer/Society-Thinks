@@ -14,7 +14,7 @@ $( document ).ready(function() {
 	  dataType: "json"
 	}).done(function(response) {
 		for(let i = 0; i < response.length; i++) {
-			createQuestionCard(response[i][0], response[i]['question'], response[i]['username'], response[i]['pro_pic'], response[i]['country'], response[i]['asked_time'], response[i]['is_yours']);
+			createQuestionCard(response[i][0], response[i]['question'], response[i]['username'], response[i]['pro_pic'], response[i]['country'], response[i]['asked_time'], response[i]['is_yours'], response[i]['already_responded']);
 			$("#Q"+response[i][0]+"-answers").click(function(){
 			  	$.ajax({
 					 url: "http://localhost:8000/php/questions.php/answers/"+response[i][0],
@@ -61,6 +61,7 @@ $( document ).ready(function() {
 			$("#overlay").css("display","none");
 			$("#answer-dialog").removeClass("mdc-dialog--open");
 			generateAndShowResults(question_id,results_dialog);
+			$("#Q"+question_id+"-answers").attr("disabled", "true");
 		}).fail(function(error){
 			console.log(error);
 		});
@@ -100,7 +101,7 @@ $( document ).ready(function() {
 		}).done(function(response) {
 			$("#question-content").html("");
 			for(let i = 0; i < response.length; i++) {
-				createQuestionCard(response[i][0], response[i]['question'], response[i]['username'], response[i]['pro_pic'], response[i]['country'], response[i]['asked_time'], response[i]['is_yours']);
+				createQuestionCard(response[i][0], response[i]['question'], response[i]['username'], response[i]['pro_pic'], response[i]['country'], response[i]['asked_time'], response[i]['is_yours'], response[i]['already_responded']);
 				  $("#Q"+response[i][0]+"-answers").click(function(){
 				  	answer_dialog.show();
 				 });
@@ -148,8 +149,10 @@ function scroll_handler(){
 	});
 };
 
-function createQuestionCard(id, question, asker, picture, country, datetime, is_yours){
-
+function createQuestionCard(id, question, asker, picture, country, datetime, is_yours, already_responded){
+  var disabled = "";
+  if (is_yours + already_responded > 0)
+  	disabled = " disabled";
   var html_string = `
   <div id="` + "Q" + id + `" class="mdc-card question-card" style="background-color:white" is_yours=`+is_yours+`>
   	<div class="country-banner"> <div class="banner-flag" style="background-image: url(http://flags.fmcdn.net/data/flags/w580/`+country+`.png);"></div></div>
@@ -161,7 +164,7 @@ function createQuestionCard(id, question, asker, picture, country, datetime, is_
       <div class="pic-row" style="width:10%;"><img class="circle" style="background-image:url(`+picture+`)"/> </div>
     </div>
     <section class="mdc-card__actions">
-      <button id="Q`+id+`-answers" class="mdc-button mdc-button--compact mdc-card__action">Answer Question</button>
+      <button id="Q`+id+`-answers" class="mdc-button mdc-button--compact mdc-card__action"` + disabled + `>Answer Question</button>
       <button id="Q`+id+`-results" class="mdc-button mdc-button--compact mdc-card__action">View Results</button>
     </section>
   </div>`;
